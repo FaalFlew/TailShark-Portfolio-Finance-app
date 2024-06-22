@@ -1,15 +1,22 @@
+import { CompanySearch } from "../comapny";
 import Card from "./Card"
+import {v4 as uuidv4} from "uuid"
 
-interface Props {}
+interface Props {
+  searchResults: CompanySearch[];
+}
 
-const CardList: React.FC<Props>= (props: Props): JSX.Element => {
-  return (
-    <div>
-    <Card companyName={"Apple"} ticker={"APPL"} price={100}/>
-    <Card companyName={"Tesla"} ticker={"TSLA"} price={60}/>
-    <Card companyName={"Microsoft"} ticker={"MSFT"} price={200}/>
-    </div>
-  )
+const CardList: React.FC<Props>= ({searchResults}: Props): JSX.Element => {
+  return (<>
+    {searchResults.length> 0 ? (
+      searchResults.map((result) => {
+        return <Card id={result.symbol} key={uuidv4()} searchResult={result}/>;
+    })
+    ): (
+
+      <h1>no results</h1>
+    )}
+  </>)
 }
 
 export default CardList

@@ -1,18 +1,20 @@
-type Props = {
-  companyName: string,
-  ticker:string,
-  price:number
+import { CompanySearch } from "../comapny";
+
+
+interface Props  {
+  id: string;
+  searchResult:CompanySearch;
 }
 
-const Card: React.FC<Props> = ({companyName, ticker, price}: Props): JSX.Element => {
+const Card: React.FC<Props> = ({searchResult}: Props): JSX.Element => {
   return (
     <div className="card">
-        <img src="" alt="Image" />
+        <img src="" alt="company logo" />
         <div className="details">
-            <h2>{companyName} {ticker}</h2>
-            <p>${price}</p>
+            <h2>{searchResult.name} {searchResult.symbol}</h2>
+            <p>${searchResult.currency}</p>
         </div>
-        <p className="info"> lorem ipsum</p>
+        <p className="info"> {searchResult.exchangeShortName} - {searchResult.stockExchange}</p>
     </div>
   )
 }
