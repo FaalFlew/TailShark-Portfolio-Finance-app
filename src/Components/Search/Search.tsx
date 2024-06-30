@@ -11,11 +11,22 @@ interface Props {
 const Search: React.FC <Props>= ({onSearchSubmit, search, handleSearchChange}: Props): JSX.Element => {
 
     return (
-    <>  
-     <form onSubmit={onSearchSubmit}>
-        <input value={search} onChange={handleSearchChange} />
-     </form>
-    </>
+      <section className="">
+      <div className="">
+        <form
+          className=""
+          onSubmit={onSearchSubmit}
+        >
+          <input
+            className=""
+            id="search-input"
+            placeholder="Search companies"
+            value={search}
+            onChange={handleSearchChange}
+          ></input>
+        </form>
+      </div>
+    </section>
   )
 }
 

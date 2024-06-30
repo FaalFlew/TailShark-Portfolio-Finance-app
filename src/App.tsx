@@ -6,6 +6,8 @@ import ListPortfolio from './Components/Portfolio/ListPortfolio/ListPortfolio';
 import { useState, ChangeEvent, SyntheticEvent } from 'react';
 import { CompanySearch } from './comapny';
 import { searchCompanies } from './api';
+import Navbar from './Components/Navbar/Navbar';
+import Hero from './Components/Hero/Hero';
 
 function App() {
 
@@ -45,6 +47,9 @@ function App() {
   const onPortfolioDelete = (e:any) => {
     e.preventDefault();
     const removed = portfolioValues.filter( (value) => {
+       console.log("val"+value);
+       console.log("target"+e.target[0].value);
+
       return value !== e.target[0].value;
     });
     setPortfolioValues(removed);
@@ -52,6 +57,8 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar/>
+      <Hero/>
       <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
       <ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
       <CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate} />
