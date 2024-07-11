@@ -1,5 +1,7 @@
 import React from 'react'
 import logo from './Tailshark-logo.png';
+import { Link } from 'react-router-dom';
+import './Navbar.css'
 interface Props {
 
 }
@@ -9,11 +11,13 @@ const Navbar = (props: Props) => {
     <nav className="">
     <div className="">
       <div className="">
+        <Link to="/">
         <img src={logo} alt="" />
+        </Link>
         <div className="">
-          <a href="" className="">
-            Dashboard
-          </a>
+          <Link to="/search" className="">
+            Search
+          </Link>
         </div>
       </div>
       <div className="">

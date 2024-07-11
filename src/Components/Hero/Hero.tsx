@@ -1,5 +1,6 @@
 import React from 'react'
 import hero from './Hero.png'
+import { Link } from 'react-router-dom'
 
 interface Props {
 
@@ -14,16 +15,16 @@ const Hero = (props: Props) => {
           Financial data with no news.
         </h1>
         <p className="">
-          Search relevant financial documents without fear mongering and fake
+          Search relevant financial documents without fear mongering and
           news.
         </p>
         <div className="">
-          <a
-            href=""
+          <Link
+            to="/search"
             className=""
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
       <div className="">
