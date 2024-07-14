@@ -1,0 +1,74 @@
+/*download font rather than importing, cdr and link can break. Can work offline with download*/
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:600,600,400);
+
+
+/* basic styles for everything */
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    font-family: 'Roboto', sans-serif;
+    word-wrap: break-word;
+   }
+body {
+    background-color: #fafafa;
+   }
+   
+:root {
+  --main-text-color:#000000;
+  --second-text-color:#0070C0;
+  --li-hover-background-color:#000000;
+  --main-background-color:#fafafa;
+  --card-transition-transform-time:0.1s;
+  --card-transition-box-shadow-time:0.3s;
+  --button-background-color:#ffffff;
+  --button-hover-background-color:#000000;
+  --button-hover-border-color:#eaa329;
+  --button-color:#000000;
+  --button-hover-color:#ffffff;
+
+  --recommended-background-color: #f5f5f7;
+  --item-size: 230px;
+
+  --counter-height:3rem;
+  --counter-button-width:2rem;
+  --counter-input-width:calc(var(--counter-button-width)*2);
+}
+
+/* HTML5 display-role reset for older browsers */
+article,aside,details,figcaption,figure,
+footer,.nav-header,hgroup,menu,nav,section{
+    display:block;
+}
+
+ol,ul{
+  list-style:none;
+}
+
+a {
+  text-decoration: none;
+  background: transparent;
+}
+
+main {
+  width: 95%;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  margin-top: 6rem;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

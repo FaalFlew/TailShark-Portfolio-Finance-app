@@ -54,6 +54,7 @@ const SearchPage = (props: Props) => {
   }
   return (
     <>
+    <main>
     <Search 
       onSearchSubmit={onSearchSubmit} 
       search={search} 
@@ -68,6 +69,7 @@ const SearchPage = (props: Props) => {
       onPortfolioCreate={onPortfolioCreate}
      />
     {serverError && <h1>{serverError}</h1>}
+    </main>
   </>  )
 }
 

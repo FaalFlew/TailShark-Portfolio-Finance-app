@@ -1,36 +1,51 @@
-import React from 'react'
+import '../../Shared/Css/Global.css'
+import './Navbar.css'
+import React, { useState } from 'react'
 import logo from './Tailshark-logo.png';
 import { Link } from 'react-router-dom';
-import './Navbar.css'
+import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
+
 interface Props {
 
 }
 
-const Navbar = (props: Props) => {
+const Navbar: React.FC = (props: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleMenuClick = (): void => {
+    setIsOpen(!isOpen);
+  }
+
+  const navClassName = isOpen ? 'nav-div mobile' : 'nav-div';
+
+
   return (
-    <nav className="">
-    <div className="">
-      <div className="">
-        <Link to="/">
-        <img src={logo} alt="" />
-        </Link>
-        <div className="">
-          <Link to="/search" className="">
+    <header className="nav-header">
+      
+
+      <div><span id="main-logo"><Link id="logo-link" to="/" >
+      <img src={logo} alt="" />
+
+</Link></span></div>
+
+
+<div className={navClassName}>
+<Link to="/search" className="">
             Search
-          </Link>
-        </div>
-      </div>
-      <div className="">
-        <div className="">Login</div>
-        <a
-          href=""
-          className=""
-        >
-          Signup
-        </a>
-      </div>
-    </div>
-  </nav>
+</Link>
+</div>
+
+
+  <div className="main-ul-container">
+    <ul className="main-ul">
+        <li><Link to="/" >Login</Link></li>
+        <li><Link to="/">Signup</Link></li>
+        <HamburgerMenu click={handleMenuClick} isOpen={isOpen} />
+    </ul>   
+  </div>
+
+  </header>   
+
   )
 }
 
