@@ -1,11 +1,17 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-type Props = {}
+type Props = {
+  children:React.ReactNode;
+}
 
-const ComapnyDashboard = (props: Props) => {
+const ComapnyDashboard = ({children}: Props) => {
   return (
-    <div>ComapnyDashboard {<Outlet />}</div>
+    <div>
+      <div>ComapnyDashboard {<Outlet />}</div>
+      <div>ComapnyDashboard {children}</div>
+
+    </div>
   )
 }
 

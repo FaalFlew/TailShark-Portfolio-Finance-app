@@ -39,7 +39,7 @@ const Navbar: React.FC = (props: Props) => {
   <div className="main-ul-container">
     <ul className="main-ul">
         <li><Link to="/" >Login</Link></li>
-        <li><Link to="/">Signup</Link></li>
+        <li><Link to="/">Sign Up</Link></li>
         <HamburgerMenu click={handleMenuClick} isOpen={isOpen} />
     </ul>   
   </div>

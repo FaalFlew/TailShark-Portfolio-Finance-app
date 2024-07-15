@@ -33,6 +33,7 @@
   
   .nav-header li {
    display: inline-block;
+   margin: 0 0.2rem;
    
   }
   
@@ -52,13 +53,14 @@
 
   }
   .nav-header .main-ul li:nth-child(2) a {
-    color:white;
-    background-color: #008bee;
-    border-radius: 4px;
+    border: #008bee solid 1px;
+    border-radius: 30px;
+    color:#0070C0;
 }
 
 .nav-header .main-ul li:nth-child(2) a:hover {
   background-color: #0070C0;
+  background-color: #e2f3ff;
   transition: all 100ms;
 }
   .sub-ul .fe{
@@ -68,22 +70,27 @@
   
   .nav-header .main-ul a:hover, .sub-ul a:hover {
    color:#0070C0;
+   background-color: #e3e3e3;
+   border-radius: 30px;
    transition: all 100ms;
   }
 
   .nav-div{
    text-align: center;
    align-items: center;
+   align-content: center;
   }
   
   .navbar-title {
     margin-top: 5px;
     font-size: 20px;
   }
+
   .navbar-title a{
   text-decoration: none;
     color: var(--main-text-color);
   }
+
   .main-ul .menu-btn, .main-ul .menu-btn__burger {
     display: none;
   }
