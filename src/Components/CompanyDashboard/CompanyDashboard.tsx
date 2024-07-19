@@ -3,16 +3,18 @@ import { Outlet } from 'react-router-dom'
 
 type Props = {
   children:React.ReactNode;
-}
+  ticker: string;
+} 
 
-const ComapnyDashboard = ({children}: Props) => {
+/** the "<Outlet />" renders nested routes, that is the profile ans income routes  */
+const CompanyDashboard = ({children,ticker}: Props) => {
   return (
     <div>
-      <div>ComapnyDashboard {<Outlet />}</div>
       <div>ComapnyDashboard {children}</div>
+      <div>ComapnyDashboard {<Outlet context={ticker}/>}</div>
 
     </div>
   )
 }
 
-export default ComapnyDashboard
+export default CompanyDashboard

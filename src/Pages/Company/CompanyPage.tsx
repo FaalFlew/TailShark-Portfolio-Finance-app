@@ -19,7 +19,11 @@ const CompanyPage = (props: Props) => {
   useEffect(() => {
     const getProfileInit = async () => {
       const result = await getCompanyProfile(ticker!);
-      setCompany(result?.data[0]);
+      if (typeof result == 'string') 
+        {
+          console.log()
+        } else {      setCompany(result?.data[0]);
+        }
     }
 
     getProfileInit();
@@ -30,7 +34,9 @@ const CompanyPage = (props: Props) => {
     <div>{company ? (
     <div>{company.companyName}
     <SideBar/> 
-    <CompanyDashboard> <Tile title="Company title" subTitle={company.companyName} /> </CompanyDashboard>
+    <CompanyDashboard ticker={ticker!}> 
+      <Tile title="Company title" subTitle={company.companyName} />
+    </CompanyDashboard>
     </div>) 
     : (
     <div> Company not found!</div>

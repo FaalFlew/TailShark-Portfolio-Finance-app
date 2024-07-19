@@ -26,11 +26,12 @@ const SearchPage = (props: Props) => {
       if (typeof result == 'string') 
       {
         setServerError(result);
-      } else if (Array.isArray(result.data))
+      } 
+       else if (Array.isArray(result.data))
       {
         setSearchResult(result.data);
       }
-      console.log("lol",setSearchResult);
+      console.log("search result set to:",setSearchResult);
   };
   
   const onPortfolioCreate = (e: any) =>
