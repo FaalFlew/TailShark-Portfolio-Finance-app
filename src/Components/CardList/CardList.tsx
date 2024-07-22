@@ -1,5 +1,5 @@
 import { SyntheticEvent } from "react";
-import { CompanySearch } from "../../comapny";
+import { CompanySearch } from "../../company";
 import Card from "../Card/Card"
 import {v4 as uuidv4} from "uuid"
 

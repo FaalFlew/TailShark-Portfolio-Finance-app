@@ -1,6 +1,6 @@
 import React, { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { searchCompanies } from '../../api';
-import { CompanySearch } from '../../comapny';
+import { CompanySearch } from '../../company';
 import CardList from '../../Components/CardList/CardList';
 import ListPortfolio from '../../Components/Portfolio/ListPortfolio/ListPortfolio';
 import Search from '../../Components/Search/Search';
@@ -27,7 +27,7 @@ const SearchPage = (props: Props) => {
       {
         setServerError(result);
       } 
-       else if (Array.isArray(result.data))
+       else if (result?.data && Array.isArray(result.data))
       {
         setSearchResult(result.data);
       }

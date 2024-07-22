@@ -1,7 +1,7 @@
 import '../../Shared/Css/Global.css'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { CompanyProfile } from '../../comapny';
+import { CompanyProfile } from '../../company';
 import { getCompanyProfile } from '../../api';
 import SideBar from '../../Components/SideBar/SideBar';
 import CompanyDashboard from '../../Components/CompanyDashboard/CompanyDashboard';
@@ -22,7 +22,8 @@ const CompanyPage = (props: Props) => {
       if (typeof result == 'string') 
         {
           console.log()
-        } else {      setCompany(result?.data[0]);
+        } else {      
+          setCompany(result?.data[0]);
         }
     }
 

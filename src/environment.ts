@@ -1,0 +1,1 @@
+export const financeApiPath = process.env.REACT_APP_FINANCE_API_PATH;
