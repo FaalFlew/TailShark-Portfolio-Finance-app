@@ -1,11 +1,12 @@
 import '../../Shared/Css/Global.css'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { CompanyProfile } from '../../company';
-import { getCompanyProfile } from '../../api';
+import { CompanyProfile } from '../../Types/company';
+import { getCompanyProfile } from '../../Api/api';
 import SideBar from '../../Components/SideBar/SideBar';
 import CompanyDashboard from '../../Components/CompanyDashboard/CompanyDashboard';
 import Tile from '../../Components/Tile/Tile';
+import { handleApiResponse } from '../../Utils/apiResponseHandler';
 
 interface Props {
     
@@ -14,17 +15,19 @@ interface Props {
 const CompanyPage = (props: Props) => {
 
   let { ticker } = useParams();
+  const [serverError, setServerError] = useState<string>();
   const [company, setCompany] = useState<CompanyProfile>();
 
   useEffect(() => {
     const getProfileInit = async () => {
-      const result = await getCompanyProfile(ticker!);
-      if (typeof result == 'string') 
-        {
-          console.log()
-        } else {      
-          setCompany(result?.data[0]);
-        }
+      const response = await getCompanyProfile(ticker!);
+      const result = handleApiResponse(response);
+      if (result.error) {
+        setServerError(result.error);
+      } else if(result.data) {
+        setCompany(result.data[0]);
+        console.log(result.data);
+      }
     }
 
     getProfileInit();

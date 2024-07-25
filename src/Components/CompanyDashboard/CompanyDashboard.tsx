@@ -6,7 +6,7 @@ type Props = {
   ticker: string;
 } 
 
-/** the "<Outlet />" renders nested routes, that is the profile ans income routes  */
+/** the "<Outlet />" renders nested routes, that is the profile and income routes  */
 const CompanyDashboard = ({children,ticker}: Props) => {
   return (
     <div>

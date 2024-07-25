@@ -1,24 +1,16 @@
 import React from 'react'
 import { TestDataCompany } from '../Table/TestData'
 
-type Props = {}
+type Props = {
+    config:any;
+    data:any;
+}
 
-const data = TestDataCompany[0];
 
-type Company = typeof data;
-
-const config = [
-    {
-        label:"company name",
-        render: (company:Company) => company.companyName,
-        subTitle:"Company name"
-    },
-]
-
-const RatioList = (props: Props) => {
-    const renderedRows = config.map((row) => {
+const RatioList = ({config, data}: Props) => {
+    const renderedRows = config.map((row:any) => {
         return (
-            <li> 
+            <li>
                 <div>
                     <div>
                         <p>{row.label}</p>
