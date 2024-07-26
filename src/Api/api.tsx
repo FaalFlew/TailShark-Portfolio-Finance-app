@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch } from "../Types/company";
+import { CompanyBalanceSheet, CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch } from "../Types/company";
 import { apiRequest } from './apiMethod';
 import { financeApiPath } from "../environment";
 import {Result} from '../Types/apiTypes'
@@ -27,4 +27,9 @@ export const getKeyMetrics = async (query: string): Promise<Result<AxiosResponse
 export const getIncomeStatement = async (query: string): Promise<Result<AxiosResponse<CompanyIncomeStatement[]>>> => {
     const url = `${financeApiPath}income-statement/${query}?limit=50&apikey=${process.env.REACT_APP_API_KEY}`;
     return apiRequest<CompanyIncomeStatement[]>(url);
+}
+
+export const getBalanceSheet = async (query: string): Promise<Result<AxiosResponse<CompanyBalanceSheet[]>>> => {
+    const url = `${financeApiPath}balance-sheet-statement/${query}?limit=40&apikey=${process.env.REACT_APP_API_KEY}`;
+    return apiRequest<CompanyBalanceSheet[]>(url);
 }

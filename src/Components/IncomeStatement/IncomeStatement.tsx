@@ -1,6 +1,6 @@
 import { Result } from '@/Types/apiTypes';
 import { getIncomeStatement } from '../../Api/api';
-import { CompanyIncomeStatement } from '@/Types/company';
+import { CompanyIncomeStatement } from '../../Types/company';
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router';

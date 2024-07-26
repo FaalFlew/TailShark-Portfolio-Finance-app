@@ -8,6 +8,8 @@ const SideBar = (props: Props) => {
     <div>SideBar
         <Link to="profile"> Profile</Link>
         <Link to="income"> Income</Link>
+        <Link to="balance"> Balance</Link>
+
     </div>
   )
 }

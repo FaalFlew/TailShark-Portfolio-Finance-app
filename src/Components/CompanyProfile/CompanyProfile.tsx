@@ -82,6 +82,7 @@ const CompanyProfile = (props: Props) => {
         setServerError(result.error);
       } else if(result.data){
         setCompanyData(result.data[0]);
+        console.log(result.data[0]);
       }
     };
     getCompanyKeyMetrics();
