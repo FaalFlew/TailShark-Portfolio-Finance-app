@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom';
 import RatioList from '../RatioList/RatioList';
 import { handleApiResponse } from '../../Utils/apiResponseHandler';
+import Spinner from '../Spinner/Spinner';
 
 type Props = {}
 
@@ -75,7 +76,7 @@ const CompanyProfile = (props: Props) => {
 
 
   useEffect(() => {
-    
+
     const getCompanyKeyMetrics = async () => {
       const cachedData = localStorage.getItem(`companyKeyMetrics_${ticker}`);
       if (cachedData) {
@@ -104,7 +105,8 @@ const CompanyProfile = (props: Props) => {
       </>
     ) : 
     (
-      <>{serverError}Loading...</>
+        <><p>{serverError}</p>
+          <Spinner isLoading={true} /></>
 
      ) }  
   </>

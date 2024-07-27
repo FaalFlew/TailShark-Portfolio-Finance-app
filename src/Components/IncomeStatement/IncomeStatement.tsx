@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router';
 import { handleApiResponse } from '../../Utils/apiResponseHandler';
 import Table from '../Table/Table';
+import Spinner from '../Spinner/Spinner';
 
 
 type Props = {}
@@ -96,7 +97,11 @@ const IncomeStatement = (props: Props) => {
 
 
   return (
-    <div>{incomeStatement ? <><Table config={configs} data={incomeStatement} /></>: <>{serverError}Loading...</>}</div>
+    <div>{incomeStatement ?
+       (<><Table config={configs} data={incomeStatement} /></>)
+       : (  <><p>{serverError}</p>
+            <Spinner isLoading={true} /></>)
+       }</div>
   )
 }
 

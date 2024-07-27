@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { getBalanceSheet } from '../../Api/api';
 import { handleApiResponse } from '../../Utils/apiResponseHandler';
 import RatioList from '../RatioList/RatioList';
+import Spinner from '../Spinner/Spinner';
 
 type Props = {}
 
@@ -94,7 +95,8 @@ const BalanceSheet = (props: Props) => {
             {balanceSheet ? (
                 <RatioList config={config} data={balanceSheet}/>
             ) : (
-                <p>Loading... {serverError}</p>
+              <><p>{serverError}</p>
+                <Spinner isLoading={true} /></>
             )}
         </div>
     )

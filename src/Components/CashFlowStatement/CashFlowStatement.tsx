@@ -4,6 +4,7 @@ import { CompanyCashFlow } from '../../Types/company';
 import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router';
 import Table from '../Table/Table';
+import Spinner from '../Spinner/Spinner';
 
 type Props = {}
 
@@ -71,7 +72,9 @@ const CashFlowStatement = (props: Props) => {
     return (<>
  {cashFlowData ? (<div><Table config={config} data={cashFlowData} /></div>) 
     : 
-    (<p>{serverError}Loading...</p>)}
+    (  <><p>{serverError}</p>
+       <Spinner isLoading={true} /></>)
+    }
     </>
   )
 }

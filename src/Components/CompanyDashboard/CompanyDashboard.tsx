@@ -10,8 +10,8 @@ type Props = {
 const CompanyDashboard = ({children,ticker}: Props) => {
   return (
     <div>
-      <div>ComapnyDashboard {children}</div>
-      <div>ComapnyDashboard {<Outlet context={ticker}/>}</div>
+      <div>CompanyDashboard {children}</div>
+      <div>CompanyDashboard {<Outlet context={ticker}/>}</div>
 
     </div>
   )
