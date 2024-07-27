@@ -60,7 +60,7 @@ const CashFlowStatement = (props: Props) => {
               }
         };
         getCompanyCashFlow();
-    },[]);
+    },[ticker]);
     return (<>
  {cashFlowData ? (<div><Table config={config} data={cashFlowData} /></div>) 
     : 

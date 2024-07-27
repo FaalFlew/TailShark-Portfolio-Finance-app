@@ -86,7 +86,7 @@ const CompanyProfile = (props: Props) => {
       }
     };
     getCompanyKeyMetrics();
-  }, []);
+  }, [ticker]);
 
   return( <>
 
