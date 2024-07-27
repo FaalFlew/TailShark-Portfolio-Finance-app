@@ -70,7 +70,7 @@ const tableConfig = [
 
 const CompanyProfile = (props: Props) => {
   const ticker = useOutletContext<string>();
-  const [error, setServerError] = useState<string>('');
+  const [serverError, setServerError] = useState<string>('');
   const [companyData, setCompanyData] = useState<CompanyKeyMetrics>();
 
 
@@ -86,7 +86,7 @@ const CompanyProfile = (props: Props) => {
       }
     };
     getCompanyKeyMetrics();
-  }, [ticker]);
+  }, []);
 
   return( <>
 
@@ -96,7 +96,7 @@ const CompanyProfile = (props: Props) => {
       </>
     ) : 
     (
-      <>Loading...</>
+      <>{serverError}Loading...</>
 
      ) }  
   </>

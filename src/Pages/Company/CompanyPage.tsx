@@ -15,7 +15,7 @@ interface Props {
 const CompanyPage = (props: Props) => {
 
   let { ticker } = useParams();
-  const [serverError, setServerError] = useState<string>();
+  const [serverError, setServerError] = useState<string>('');
   const [company, setCompany] = useState<CompanyProfile>();
 
   useEffect(() => {
@@ -24,6 +24,7 @@ const CompanyPage = (props: Props) => {
       const result = handleApiResponse(response);
       if (result.error) {
         setServerError(result.error);
+        console.log(result.error, "sererr")
       } else if(result.data) {
         setCompany(result.data[0]);
         console.log(result.data);
@@ -40,10 +41,14 @@ const CompanyPage = (props: Props) => {
     <SideBar/> 
     <CompanyDashboard ticker={ticker!}> 
       <Tile title="Company title" subTitle={company.companyName} />
+      <Tile title="Price" subTitle={company.price.toString()} />
+      <Tile title="Sector" subTitle={company.sector} />
+
+
     </CompanyDashboard>
     </div>) 
     : (
-    <div> Company not found!</div>
+    <div> Company not found! {serverError}</div>
 
     )
     } </div>

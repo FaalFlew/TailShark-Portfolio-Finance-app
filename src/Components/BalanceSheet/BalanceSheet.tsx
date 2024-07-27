@@ -1,12 +1,11 @@
 import { useOutletContext } from 'react-router-dom';
-import { CompanyBalanceSheet, CompanyCashFlow } from '../../Types/company';
+import { CompanyBalanceSheet } from '../../Types/company';
 import React, { useEffect, useState } from 'react'
 import { getBalanceSheet } from '../../Api/api';
 import { handleApiResponse } from '../../Utils/apiResponseHandler';
 import RatioList from '../RatioList/RatioList';
 
 type Props = {}
-
 
 const config = [
     {
@@ -66,31 +65,39 @@ const config = [
 
 const BalanceSheet = (props: Props) => {
     const ticker = useOutletContext<string>();
-    const [serverError, setServerError] =useState<string>('');
+    const [serverError, setServerError] = useState<string>('');
     const [balanceSheet, setBalanceSheet] = useState<CompanyBalanceSheet>();
-    useEffect(() => {
-    const getCompanyBalanceSheet = async () => {
-        const response = await getBalanceSheet(ticker);
-        const result = handleApiResponse(response)
-        if (result.error) {
-            setServerError(result.error);
-        } else if(result.data) {
-            setBalanceSheet(result.data[0]);
-            console.log(result.data[0],"balance")
-        }
-    }
-    getCompanyBalanceSheet();
 
-    },[])
-  return (
-    <div>
-        <h2>Balance Sheet</h2>
-        {balanceSheet ? ( <RatioList config={config} data={balanceSheet}/> ) 
-        : 
-        (<p>Not found, {serverError}</p>)
+    useEffect(() => {
+        const getCompanyBalanceSheet = async () => {
+            const cachedData = localStorage.getItem(`balanceSheet_${ticker}`);
+            if (cachedData) {
+                setBalanceSheet(JSON.parse(cachedData));
+            } else {
+                const response = await getBalanceSheet(ticker);
+                const result = handleApiResponse(response);
+                if (result.error) {
+                    setServerError(result.error);
+                } else if (result.data) {
+                    setBalanceSheet(result.data[0]);
+                    localStorage.setItem(`balanceSheet_${ticker}`, JSON.stringify(result.data[0]));
+                    console.log(result.data[0], "balance");
+                }
+            }
         }
-    </div>
-  )
+        getCompanyBalanceSheet();
+    }, [ticker]);
+
+    return (
+        <div>
+            <h2>Balance Sheet</h2>
+            {balanceSheet ? (
+                <RatioList config={config} data={balanceSheet}/>
+            ) : (
+                <p>Loading... {serverError}</p>
+            )}
+        </div>
+    )
 }
 
 export default BalanceSheet

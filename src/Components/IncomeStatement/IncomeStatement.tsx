@@ -4,7 +4,7 @@ import { CompanyIncomeStatement } from '../../Types/company';
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router';
-import { handleApiResponse } from '../..//Utils/apiResponseHandler';
+import { handleApiResponse } from '../../Utils/apiResponseHandler';
 import Table from '../Table/Table';
 
 
@@ -71,7 +71,7 @@ const configs = [
 const IncomeStatement = (props: Props) => {
   const ticker = useOutletContext<string>();
   const [incomeStatement, setIncomeStatement] = useState<CompanyIncomeStatement[]>();
-  const [error, setServerError] = useState<string>('');
+  const [serverError, setServerError] = useState<string>('');
 
   useEffect(() => {
     const incomeStatementFetch = async () => {
@@ -89,7 +89,7 @@ const IncomeStatement = (props: Props) => {
 
 
   return (
-    <div>{incomeStatement ? <><Table config={configs} data={incomeStatement} /></>: <>Loading...</>}</div>
+    <div>{incomeStatement ? <><Table config={configs} data={incomeStatement} /></>: <>{serverError}Loading...</>}</div>
   )
 }
 
