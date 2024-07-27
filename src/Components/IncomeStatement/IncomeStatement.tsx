@@ -74,16 +74,23 @@ const IncomeStatement = (props: Props) => {
   const [serverError, setServerError] = useState<string>('');
 
   useEffect(() => {
+
     const incomeStatementFetch = async () => {
+      const cachedData = localStorage.getItem(`incomeStatement_${ticker}`);
+      if (cachedData) {
+        setIncomeStatement(JSON.parse(cachedData));
+      } else {
       const response = await getIncomeStatement(ticker);
       const result = handleApiResponse(response);
-
       if (result.error) {
         setServerError(result.error);
       } else {
-        setIncomeStatement(result!.data);
+        setIncomeStatement(result.data);
+        localStorage.setItem(`incomeStatement_${ticker}`, JSON.stringify(result.data));
       }
     }
+  }
+
     incomeStatementFetch()
   },[ticker])
 

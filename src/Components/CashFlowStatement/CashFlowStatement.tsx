@@ -47,18 +47,25 @@ const config = [
 
 const CashFlowStatement = (props: Props) => {
     const ticker = useOutletContext<string>()
-    const [cashFlowData, setCashFlowData] = useState<CompanyCashFlow[]>()
     const [serverError,setServerError] = useState<string>();
+    const [cashFlowData, setCashFlowData] = useState<CompanyCashFlow[]>()
+
     useEffect(() =>{
         const getCompanyCashFlow = async () => {
+          const cachedData = localStorage.getItem(`cashFlow_${ticker}`);
+          if (cachedData) {
+            setCashFlowData(JSON.parse(cachedData));
+          } else {
             const response = await getCashFlowStatement(ticker!);
             const result = handleApiResponse(response);
             if (result.error) {
                 setServerError(result.error);
               } else if(result.data){
                 setCashFlowData(result.data);
+                localStorage.setItem(`cashFlow_${ticker}`, JSON.stringify(result.data));
               }
-        };
+        }
+      };
         getCompanyCashFlow();
     },[ticker]);
     return (<>

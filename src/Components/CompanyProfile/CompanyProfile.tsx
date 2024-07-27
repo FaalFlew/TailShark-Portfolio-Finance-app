@@ -71,28 +71,36 @@ const tableConfig = [
 const CompanyProfile = (props: Props) => {
   const ticker = useOutletContext<string>();
   const [serverError, setServerError] = useState<string>('');
-  const [companyData, setCompanyData] = useState<CompanyKeyMetrics>();
+  const [companyKeyMetrics, setCompanyKeyMetrics] = useState<CompanyKeyMetrics>();
 
 
   useEffect(() => {
+    
     const getCompanyKeyMetrics = async () => {
+      const cachedData = localStorage.getItem(`companyKeyMetrics_${ticker}`);
+      if (cachedData) {
+        setCompanyKeyMetrics(JSON.parse(cachedData));
+      } else {
       const response = await getKeyMetrics(ticker);
       const result = handleApiResponse(response);
       if (result.error) {
         setServerError(result.error);
       } else if(result.data){
-        setCompanyData(result.data[0]);
+        setCompanyKeyMetrics(result.data[0]);
+        localStorage.setItem(`companyKeyMetrics_${ticker}`, JSON.stringify(result.data[0]));
         console.log(result.data[0]);
       }
-    };
+    }
+  };
+
     getCompanyKeyMetrics();
   }, [ticker]);
 
   return( <>
 
-    {companyData ? (
+    {companyKeyMetrics ? (
       <>
-      <RatioList data={companyData} config={tableConfig} /> 
+      <RatioList data={companyKeyMetrics} config={tableConfig} /> 
       </>
     ) : 
     (

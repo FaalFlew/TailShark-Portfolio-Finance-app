@@ -66,20 +66,20 @@ const config = [
 const BalanceSheet = (props: Props) => {
     const ticker = useOutletContext<string>();
     const [serverError, setServerError] = useState<string>('');
-    const [balanceSheet, setBalanceSheet] = useState<CompanyBalanceSheet>();
+    const [balanceSheet, setBalanceSheetData] = useState<CompanyBalanceSheet>();
 
     useEffect(() => {
         const getCompanyBalanceSheet = async () => {
             const cachedData = localStorage.getItem(`balanceSheet_${ticker}`);
             if (cachedData) {
-                setBalanceSheet(JSON.parse(cachedData));
+                setBalanceSheetData(JSON.parse(cachedData));
             } else {
                 const response = await getBalanceSheet(ticker);
                 const result = handleApiResponse(response);
                 if (result.error) {
                     setServerError(result.error);
                 } else if (result.data) {
-                    setBalanceSheet(result.data[0]);
+                    setBalanceSheetData(result.data[0]);
                     localStorage.setItem(`balanceSheet_${ticker}`, JSON.stringify(result.data[0]));
                     console.log(result.data[0], "balance");
                 }
