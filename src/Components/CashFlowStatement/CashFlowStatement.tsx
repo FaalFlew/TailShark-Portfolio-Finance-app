@@ -1,5 +1,5 @@
 import { handleApiResponse } from '../../Utils/apiResponseHandler';
-import { getCashFlowStatement } from '../../Api/api';
+import { getCashFlowStatement } from '../../Api/companyDataApi';
 import { CompanyCashFlow } from '../../Types/company';
 import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router';

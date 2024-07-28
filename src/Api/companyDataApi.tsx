@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { CompanyBalanceSheet, CompanyCashFlow, CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch } from "../Types/company";
+import { CompanyBalanceSheet, CompanyCashFlow, CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch, CompanyTenK } from "../Types/company";
 import { apiRequest } from './apiMethod';
 import { financeApiPath } from "../environment";
 import {Result} from '../Types/apiTypes'
@@ -37,4 +37,9 @@ export const getBalanceSheet = async (query: string): Promise<Result<AxiosRespon
 export const getCashFlowStatement = async (query: string): Promise<Result<AxiosResponse<CompanyCashFlow[]>>> => {
     const url = `${financeApiPath}cash-flow-statement/${query}?limit=40&apikey=${process.env.REACT_APP_API_KEY}`;
     return apiRequest<CompanyCashFlow[]>(url);
+}
+
+export const getTenK = async (query: string): Promise<Result<AxiosResponse<CompanyTenK[]>>> => {
+    const url = `${financeApiPath}sec_filings/${query}?type=10-k&page=0&apikey=${process.env.REACT_APP_API_KEY}`;
+    return apiRequest<CompanyTenK[]>(url);
 }

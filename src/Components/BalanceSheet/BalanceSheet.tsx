@@ -1,7 +1,7 @@
 import { useOutletContext } from 'react-router-dom';
 import { CompanyBalanceSheet } from '../../Types/company';
 import React, { useEffect, useState } from 'react'
-import { getBalanceSheet } from '../../Api/api';
+import { getBalanceSheet } from '../../Api/companyDataApi';
 import { handleApiResponse } from '../../Utils/apiResponseHandler';
 import RatioList from '../RatioList/RatioList';
 import Spinner from '../Spinner/Spinner';

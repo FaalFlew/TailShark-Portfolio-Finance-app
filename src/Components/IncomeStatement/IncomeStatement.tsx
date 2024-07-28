@@ -1,5 +1,5 @@
 import { Result } from '@/Types/apiTypes';
-import { getIncomeStatement } from '../../Api/api';
+import { getIncomeStatement } from '../../Api/companyDataApi';
 import { CompanyIncomeStatement } from '../../Types/company';
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react'

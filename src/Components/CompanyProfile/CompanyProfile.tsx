@@ -1,4 +1,4 @@
-import { getKeyMetrics } from '../../Api/api';
+import { getKeyMetrics } from '../../Api/companyDataApi';
 import { CompanyKeyMetrics } from '../../Types/company';
 import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom';
