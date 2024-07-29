@@ -12,7 +12,7 @@ const CompanyDashboard = ({children,ticker}: Props) => {
     <div>
       <div>CompanyDashboard {children}</div>
       <div>CompanyDashboard {<Outlet context={ticker}/>}</div>
-
+      
     </div>
   )
 }
