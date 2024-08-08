@@ -1,41 +1,42 @@
-import React from 'react'
-import { testIncomeStatementData } from './TestData'
+import React from "react";
+import "./Table.css";
 
 type Props = {
-    config:any;
-    data:any;
-}
+  config: any;
+  data: any;
+};
 
+const Table = ({ config, data }: Props) => {
+  const renderedRows = data.map((company: any) => {
+    return (
+      <tr key={company.cik} className="custom-table-row">
+        {config.map((val: any, index: number) => (
+          <td key={index} className="custom-table-cell">
+            {val.render(company)}
+          </td>
+        ))}
+      </tr>
+    );
+  });
 
-const Table = ({config,data}: Props) => {
-    const renderedRows = data.map((company:any) => {
-        return (
-            <tr key={company.cik}>
-                {config.map((val: any) => {
-                return (
-                <td className="">
-                    {val.render(company)}
-                </td>
-                )
-                })}
-            </tr>
-        );
-    } );
+  const renderedHeaders = config.map((config: any, index: number) => {
+    return (
+      <th key={index} className="custom-table-header">
+        {config.label}
+      </th>
+    );
+  });
 
-    const renderedHeaders = config.map((config:any) => {
-        return (
-            <th key={config.label}>{config.label}</th>
-        )
-
-    })
   return (
-    <div>
-        <table>
-            <thead><tr>{renderedHeaders}</tr></thead>
-            <tbody>{renderedRows}</tbody>
-        </table>
+    <div className="custom-table-container">
+      <table className="custom-table">
+        <thead>
+          <tr className="custom-table-header-row">{renderedHeaders}</tr>
+        </thead>
+        <tbody>{renderedRows}</tbody>
+      </table>
     </div>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;
