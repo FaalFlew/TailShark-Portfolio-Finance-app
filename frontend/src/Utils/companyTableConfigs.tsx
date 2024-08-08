@@ -117,12 +117,6 @@ export const balanceSheetConfig = [
   
 export const profileConfig = [
   {
-    label: "Market Cap",
-    render: (company: CompanyKeyMetrics) =>
-      formatLargeNonMonetaryNumber(company.marketCapTTM),
-    subTitle: "Total value of all a company's shares of stock",
-  },
-  {
     label: "Current Ratio",
     render: (company: CompanyKeyMetrics) =>
       formatRatio(company.currentRatioTTM),
