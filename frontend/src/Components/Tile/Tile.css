@@ -17,22 +17,17 @@
   cursor: pointer;
 }
 
-
 .tile-title {
   margin: 0;
   font-size: 17px;
   font-weight: 100;
-  color: #000000;
   text-align: center;
 }
 
-.tile-subtitle {
+.tile-subtitle-container {
   margin-top: 4px;
-  font-size: 14px;
-  color: #000000;
   font-weight: bold;
 }
-
 
 .tile-container:hover {
   transform: translateY(-2px);
@@ -50,8 +45,5 @@
 @media (max-width: 600px) {
     .tile-title {
         font-size: 13px;
-    }
-    .tile-subtitle {
-        font-size: 11px;
     }
 }

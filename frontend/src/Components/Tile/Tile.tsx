@@ -14,13 +14,13 @@ const Tile = ({ title, subTitle }: Props) => {
         {title}
       </h5>
 
-      <span className="tile-subtitle">
+      <div className="tile-subtitle-container">
         {typeof subTitle === 'number' && !isNaN(subTitle) ? (
           <>{formatLargeMonetaryNumber(subTitle)}</>
         ) : (
           <>{subTitle}</>
         )}
-      </span>
+      </div>
       </div>
     </div>
   );
