@@ -1,0 +1,35 @@
+:root {
+    --delete-color: #fe6767;
+    --add-color: #3a99dd;
+    --button-text-color: #ffffff;
+    --button-hover-opacity: 0.9;
+    --button-padding: 10px 20px;
+    --button-border-radius: 5px;
+    --button-font-size: 16px;
+    --button-transition: 0.3s;
+    --button-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    border: none;
+    color: var(--button-text-color);
+    cursor: pointer;
+    padding: var(--button-padding);
+    border-radius: var(--button-border-radius);
+    font-size: var(--button-font-size);
+    transition: background-color var(--button-transition), box-shadow var(--button-transition);
+    box-shadow: var(--button-shadow);
+    margin: 10px;
+  }
+  
+  button:hover {
+    opacity: var(--button-hover-opacity);
+  }
+  
+  .delete {
+    background-color: var(--delete-color);
+  }
+  
+  .add {
+    background-color: var(--add-color);
+  }

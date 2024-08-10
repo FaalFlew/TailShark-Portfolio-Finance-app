@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState, SyntheticEvent} from 'react'
-
+import './Search.css'
 
 interface Props {
     onSearchSubmit: (e: SyntheticEvent) => void;
@@ -11,16 +11,16 @@ interface Props {
 const Search: React.FC <Props>= ({onSearchSubmit, search, handleSearchChange}: Props): JSX.Element => {
 
     return (
-      <section className="">
-      <div className="">
+      <section className="search-section">
+      <div className="search-container">
         <form
-          className=""
+          className="search-form"
           onSubmit={onSearchSubmit}
         >
           <input
-            className=""
+            className="search-input"
             id="search-input"
-            placeholder="Search companies"
+            placeholder="Search by Ticker"
             value={search}
             onChange={handleSearchChange}
           ></input>

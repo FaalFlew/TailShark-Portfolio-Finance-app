@@ -11,7 +11,7 @@ interface Props  {
 const CardPortfolio = ({portfolioValue,onPortfolioDelete}: Props) => {
   return (
     <div className="">
-    <Link to={`/comapny/${portfolioValue}`} className="">{portfolioValue}</Link>
+    <Link to={`/company/${portfolioValue}`} className="">{portfolioValue}</Link>
     <DeletePortfolio
       portfolioValue={portfolioValue}
       onPortfolioDelete={onPortfolioDelete}
