@@ -104,7 +104,8 @@ nav a span {
     display: flex;
     align-items: center;
     gap: .325rem;
-    padding: 0.625rem .58rem;
+    padding: 0.625rem .73rem;
+    font-size: 1rem;
   }
   
 aside {

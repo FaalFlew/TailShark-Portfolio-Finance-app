@@ -1,25 +1,27 @@
 .tenk-item {
     background-color: black;
     margin: 0 .3rem;
-    
 }
 
 .tenk-item:hover {
     background-color: rgb(111, 111, 111);
-
 }
 
 .tenk-item a { 
     padding: .3rem .7rem;
     color:white;
-    
 }
 
 @media (max-width: 600px) {
     .tenk-item {
-    padding: .2rem .4rem;
+    padding: .2rem 1rem;
     font-size: 12px;
     border-radius: 0px;
+
+    }
+    .tenk-item a { 
+        padding: .3rem 0rem;
+        color:white;
     }
 
 }
