@@ -53,13 +53,15 @@ a {
 }
 
 main {
-  width: 95%;
-  max-width: 1440px;
   margin: 0 auto;
   margin-bottom: 3rem;
   margin-top: 5rem;
 }
 
+.main{
+  width: 95%;
+  max-width: 1440px;
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

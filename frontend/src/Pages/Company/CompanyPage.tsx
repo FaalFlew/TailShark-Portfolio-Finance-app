@@ -1,4 +1,5 @@
 import "../../Shared/Css/Global.css";
+import "./CompanyPage.css"
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CompanyProfile } from "../../Types/company";
@@ -19,33 +20,45 @@ const CompanyPage = (props: Props) => {
 
   useEffect(() => {
     const getProfileInit = async () => {
-      const response = await getCompanyProfile(ticker!);
-      const result = handleApiResponse(response);
-      if (result.error) {
-        setServerError(result.error);
-        console.log(result.error, "sererr");
-      } else if (result.data) {
-        setCompany(result.data[0]);
-        console.log(result.data);
+      const cachedData = localStorage.getItem(`companyProfile_${ticker}`);
+      if (cachedData) {
+        setCompany(JSON.parse(cachedData));
+      } else {
+        const response = await getCompanyProfile(ticker!);
+        const result = handleApiResponse(response);
+        if (result.error) {
+          setServerError(result.error);
+        } else if (result.data) {
+          setCompany(result.data[0]);
+          localStorage.setItem(
+            `companyProfile_${ticker}`,
+            JSON.stringify(result.data[0])
+          );
+          console.log(result.data[0]);
+        }
       }
     };
 
     getProfileInit();
-  }, []);
+  }, [ticker]);
+
+
+
 
   return (
-    <main>
+    <>
+    <SideBar />
+
+    <main id="main">
       <div>
         {company ? (
-          <div>
-            {company.companyName}
-            <SideBar />
+          <div className="company-container">
             <CompanyDashboard ticker={ticker!}>
               <TileContainer>
-                <Tile title="Company title" subTitle={company.companyName} />
+                <Tile title="Company" subTitle={company.companyName} />
                 <Tile title="Price" subTitle={company.price} />
                 <Tile title="Sector" subTitle={company.sector} />
-                <Tile title="Market Cap" subTitle={company.mktCap} />
+                <Tile title="Mkt Cap" subTitle={company.mktCap} />
               </TileContainer>
               <TenKFinder ticker={company.symbol} />
             </CompanyDashboard>
@@ -55,6 +68,7 @@ const CompanyPage = (props: Props) => {
         )}{" "}
       </div>
     </main>
+    </>
   );
 };
 

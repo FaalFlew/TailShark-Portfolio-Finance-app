@@ -4,8 +4,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px;
-  margin: 8px;
+  margin:8px;
+  padding:8px;
   border-radius: 8px;
   border-top: 1px solid #0070C0;
   border-bottom: 1px solid #0070C0;
@@ -46,7 +46,19 @@
 }
 
 @media (max-width: 600px) {
+  .tile-container  {
+    width: 70px;
+    margin:4px;
+    padding:4px;
+  }
     .tile-title {
         font-size: 13px;
+    }
+    .tile-subtitle-container, .tile-subtitle-container .number-value{
+      font-size:14px;
+    }
+
+    .tile-subtitle-container .dollar-sign{
+      font-size:12px;
     }
 }

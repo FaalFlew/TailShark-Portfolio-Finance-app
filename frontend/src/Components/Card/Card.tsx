@@ -17,7 +17,7 @@ const Card: React.FC<Props> = ({id,searchResult, onPortfolioCreate}: Props): JSX
     key={id}
     id={id}
   >
-    <Link to={`/company/${searchResult.symbol}`} className="">
+    <Link to={`/company/${searchResult.symbol}/profile`} className="">
       {searchResult.name} ({searchResult.symbol})
     </Link>
     <p className="">{searchResult.currency}</p>

@@ -9,9 +9,9 @@ type Props = {
 /** the "<Outlet />" renders nested routes, that is the profile and income routes  */
 const CompanyDashboard = ({children,ticker}: Props) => {
   return (
-    <div>
-      <div>CompanyDashboard {children}</div>
-      <div>CompanyDashboard {<Outlet context={ticker}/>}</div>
+    <div className='dashboard-container'>
+      <div>{children}</div>
+      <div>{<Outlet context={ticker}/>}</div>
       
     </div>
   )

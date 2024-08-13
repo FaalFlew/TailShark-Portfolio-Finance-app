@@ -1,17 +1,37 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+// Sidebar.tsx
 
-type Props = {}
+import React, { useState } from 'react';
+import SidebarItem from './SideBarItem/SideBarItem';
+import 'boxicons/css/boxicons.min.css';
+import "./SideBar.css";
 
-const SideBar = (props: Props) => {
+const Sidebar: React.FC = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleResizeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsExpanded((prevExpanded) => !prevExpanded);
+    document.body.classList.toggle('sb-expanded');
+  };
+
   return (
-    <div>SideBar
-        <Link to="profile"> Profile</Link>
-        <Link to="income"> Income</Link>
-        <Link to="balance"> Balance</Link>
-        <Link to="cashflow"> Cash flow</Link>
-    </div>
-  )
-}
+      <aside className={`sidebar-container ${isExpanded ? 'sb-expanded' : ''}`}>
+        <nav>
+          <ul>
+            <SidebarItem to="profile" icon="bx bx-home-circle" label="profile" />
+            <SidebarItem to="income" icon="bx bx-money" label="income" />
+            <SidebarItem to="balance" icon="bx bx-spreadsheet" label="balance" />
+            <SidebarItem to="cashflow" icon="bx bx-dollar-circle" label="cashflow" />
+            <li>
+              <a href="#" onClick={handleResizeClick} data-resize-btn>
+                <i className="bx bx-chevrons-right"></i>
+                <span>Collapse</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+  );
+};
 
-export default SideBar
+export default Sidebar;

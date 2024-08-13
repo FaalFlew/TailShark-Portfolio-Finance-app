@@ -6,7 +6,7 @@ interface Props {}
 
 const HomePage = (props: Props) => {
   return (
-    <div><main><Hero /></main></div>
+    <div><main className='main'><Hero /></main></div>
   )
 }
 

@@ -53,7 +53,7 @@ const SearchPage = (props: Props) => {
   }
   return (
     <>
-    <main>
+    <main className='main'>
     <Search 
       onSearchSubmit={onSearchSubmit} 
       search={search} 
