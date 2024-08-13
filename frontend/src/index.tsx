@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { searchCompanies } from './Api/companyDataApi';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './Routes/Routes';
 
@@ -9,7 +7,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-console.log(searchCompanies("msft"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router}/>

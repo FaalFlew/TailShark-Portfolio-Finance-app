@@ -23,17 +23,24 @@ const CompanyPage = (props: Props) => {
       const cachedData = localStorage.getItem(`companyProfile_${ticker}`);
       if (cachedData) {
         setCompany(JSON.parse(cachedData));
+        console.log("from storage")
+        return;
       } else {
         const response = await getCompanyProfile(ticker!);
         const result = handleApiResponse(response);
         if (result.error) {
           setServerError(result.error);
+          console.log("nrom storage");
+
         } else if (result.data) {
           setCompany(result.data[0]);
           localStorage.setItem(
             `companyProfile_${ticker}`,
             JSON.stringify(result.data[0])
+            
           );
+          console.log("nsssrom storage");
+
           console.log(result.data[0]);
         }
       }
