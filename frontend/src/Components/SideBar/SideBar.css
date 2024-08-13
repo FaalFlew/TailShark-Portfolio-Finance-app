@@ -23,11 +23,11 @@ aside {
   z-index: 1000;
 }
 
-nav {
+.side-nav {
   height: 100%;
 }
 
-nav ul {
+.side-nav ul {
   list-style: none;
   height: 100%;
   display: flex;
@@ -35,11 +35,11 @@ nav ul {
   gap: .25rem;
 }
 
-nav li:last-child {
+.side-nav li:last-child {
   margin-top: auto;
 }
 
-nav a {
+.side-nav a {
   display: flex;
   align-items: center;
   gap: .625rem;
@@ -52,22 +52,22 @@ nav a {
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-nav a.active,
-nav a:hover,
-nav a:focus-visible {
+.side-nav a.active,
+.side-nav a:hover,
+.side-nav a:focus-visible {
   outline: none;
   color: #fff;
   background-color: #129cff;
 }
 
-nav a span {
+.side-nav a span {
   font-size: 0.875rem;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
 
-.sb-expanded nav a span {
+.sb-expanded .side-nav a span {
   opacity: 1;
   visibility: visible;
 }
@@ -85,7 +85,7 @@ nav a span {
     background-color: #fff;
   }
 
-  nav a {
+  .side-nav a {
     color: #fff;
   }
   aside {
@@ -100,17 +100,20 @@ nav a span {
     --sb-width: 8.5rem;
   }
 
-  nav a {
+  .side-nav a {
     display: flex;
     align-items: center;
     gap: .325rem;
     padding: 0.625rem .73rem;
     font-size: 1rem;
+    overflow: hidden;
+    transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+
   }
   
 aside {
-
   padding: 1rem .8rem;
 
 }
+
 }

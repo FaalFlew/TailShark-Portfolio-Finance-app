@@ -68,7 +68,7 @@
    font-size:0.9rem;
   }
   
-  .nav-header .main-ul a:hover, .sub-ul a:hover {
+  .nav-header .main-ul li:nth-child(1) a:hover{
    color:#0070C0;
    background-color: #e3e3e3;
    border-radius: 30px;

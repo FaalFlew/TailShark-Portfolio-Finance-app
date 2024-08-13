@@ -48,8 +48,9 @@
 @media (max-width: 600px) {
   .tile-container  {
     width: 70px;
-    margin:4px;
+    margin:3px;
     padding:4px;
+    border: none;
   }
     .tile-title {
         font-size: 13px;
