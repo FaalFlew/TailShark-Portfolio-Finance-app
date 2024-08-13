@@ -41,7 +41,7 @@ const CompanyProfile = (props: Props) => {
 
   return (
     <>
-      <h2>Balance sheet</h2>
+      <h2>Company profile</h2>
 
       {companyKeyMetrics ? (
         <>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CompanyTenK } from '../../../Types/company'
-import React from 'react'
+import './TenKFinderItem.css'
+
 
 type Props = {
     tenK:CompanyTenK;
@@ -9,12 +10,14 @@ type Props = {
 const TenKFinderItem = ({tenK}: Props) => {
     const fillingDate = new Date(tenK.fillingDate).getFullYear();
   return (
+    <div className="tenk-item">
     <Link
     reloadDocument
     to={tenK.finalLink}
     type="button"
     className=""
-    > 10k - {tenK.symbol} - {fillingDate}</Link>
+    > 10k {fillingDate}</Link>
+    </div>
   )
 }
 

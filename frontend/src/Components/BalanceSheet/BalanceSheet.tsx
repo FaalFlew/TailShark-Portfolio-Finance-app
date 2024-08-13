@@ -38,8 +38,8 @@ const BalanceSheet = (props: Props) => {
   }, [ticker]);
 
   return (
-    <>      <h2>Company profile</h2>
-
+    <>      
+    <h2>Balance sheet</h2>
       {balanceSheet ? (
         <RatioList config={balanceSheetConfig} data={balanceSheet} />
       ) : (

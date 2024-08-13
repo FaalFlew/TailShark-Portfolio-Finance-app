@@ -18,10 +18,10 @@ const Sidebar: React.FC = () => {
       <aside className={`sidebar-container ${isExpanded ? 'sb-expanded' : ''}`}>
         <nav>
           <ul>
-            <SidebarItem to="profile" icon="bx bx-home-circle" label="profile" />
-            <SidebarItem to="income" icon="bx bx-money" label="income" />
-            <SidebarItem to="balance" icon="bx bx-spreadsheet" label="balance" />
-            <SidebarItem to="cashflow" icon="bx bx-dollar-circle" label="cashflow" />
+            <SidebarItem to="profile" icon="bx bx-home-circle" label="Profile" />
+            <SidebarItem to="income" icon="bx bx-money" label="Income" />
+            <SidebarItem to="balance" icon="bx bx-spreadsheet" label="Balance" />
+            <SidebarItem to="cashflow" icon="bx bx-dollar-circle" label="Cashflow" />
             <li>
               <a href="#" onClick={handleResizeClick} data-resize-btn>
                 <i className="bx bx-chevrons-right"></i>

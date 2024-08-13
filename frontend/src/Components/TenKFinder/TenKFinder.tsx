@@ -4,7 +4,7 @@ import { getTenK } from "../../Api/companyDataApi";
 import { handleApiResponse } from "../../Utils/apiResponseHandler";
 import TenKFinderItem from "./TenKFinderItem/TenKFinderItem";
 import Spinner from "../Spinner/Spinner";
-
+import "./TenKFinder.css"
 type Props = {
   ticker: string;
 };
@@ -34,9 +34,9 @@ const TenKFinder = ({ ticker }: Props) => {
     getTenKData();
   }, [ticker]);
   return (
-    <div>
+    <div className="tenkfinder-container">
       {companyTenK ? (
-        companyTenK?.slice(0, 5).map((tenK: CompanyTenK) => {
+        companyTenK?.slice(0, 4).map((tenK: CompanyTenK) => {
           return <TenKFinderItem tenK={tenK} />;
         })
       ) : (
