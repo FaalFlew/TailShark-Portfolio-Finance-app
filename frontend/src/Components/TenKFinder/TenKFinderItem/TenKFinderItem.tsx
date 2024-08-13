@@ -14,7 +14,7 @@ const TenKFinderItem = ({tenK}: Props) => {
     to={tenK.finalLink}
     type="button"
     className=""
-    >10k - {tenK.symbol} - {fillingDate}</Link>
+    > 10k - {tenK.symbol} - {fillingDate}</Link>
   )
 }
 

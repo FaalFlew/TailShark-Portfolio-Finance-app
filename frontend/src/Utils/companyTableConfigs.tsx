@@ -1,10 +1,15 @@
 import { formatLargeMonetaryNumber, formatLargeNonMonetaryNumber,formatRatio } from "./NumberFormatting";
 import { CompanyBalanceSheet, CompanyCashFlow, CompanyIncomeStatement, CompanyKeyMetrics } from "../Types/company";
 
+const getYearFromDate = (value:string) => {
+  const date = new Date(value);
+  return date.getFullYear().toString();
+}
+
 export const cashFlowConfig = [
   {
     label: "Date",
-    render: (company: CompanyCashFlow) => company.date,
+    render: (company: CompanyCashFlow) => getYearFromDate(company.date),
   },
   {
     label: "Operating Cashflow",
@@ -176,7 +181,7 @@ export const profileConfig = [
 export const incomeStatementConfig = [
   {
     label: "Date",
-    render: (company: CompanyIncomeStatement) => company.date,
+    render: (company: CompanyIncomeStatement) => getYearFromDate(company.date),
   },
   {
     label: "Revenue",
