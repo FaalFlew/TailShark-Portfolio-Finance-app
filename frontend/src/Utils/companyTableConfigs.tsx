@@ -98,11 +98,6 @@ export const balanceSheetConfig = [
       formatLargeMonetaryNumber(company.longTermDebt),
   },
   {
-    label: "Long-Term Income Taxes",
-    render: (company: CompanyBalanceSheet) =>
-      formatLargeMonetaryNumber(company.otherLiabilities),
-  },
-  {
     label: "Stakeholder's Equity",
     render: (company: CompanyBalanceSheet) =>
       formatLargeMonetaryNumber(company.totalStockholdersEquity),

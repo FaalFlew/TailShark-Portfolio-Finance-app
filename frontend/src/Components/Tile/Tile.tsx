@@ -1,6 +1,6 @@
-import { formatLargeMonetaryNumber } from '../../Utils/NumberFormatting';
-import React from 'react';
-import './Tile.css'
+import { formatLargeMonetaryNumber } from "../../Utils/NumberFormatting";
+import React from "react";
+import "./Tile.css";
 interface Props {
   title: string;
   subTitle: string | number;
@@ -10,17 +10,15 @@ const Tile = ({ title, subTitle }: Props) => {
   return (
     <div className="tile-container">
       <div>
-      <h5 className="tile-title">
-        {title}
-      </h5>
+        <h5 className="tile-title">{title}</h5>
 
-      <div className="tile-subtitle-container">
-        {typeof subTitle === 'number' && !isNaN(subTitle) ? (
-          <>{formatLargeMonetaryNumber(subTitle)}</>
-        ) : (
-          <>{subTitle}</>
-        )}
-      </div>
+        <div className="tile-subtitle-container">
+          {typeof subTitle === "number" && !isNaN(subTitle) ? (
+            <>{formatLargeMonetaryNumber(subTitle)}</>
+          ) : (
+            <>{subTitle}</>
+          )}
+        </div>
       </div>
     </div>
   );
