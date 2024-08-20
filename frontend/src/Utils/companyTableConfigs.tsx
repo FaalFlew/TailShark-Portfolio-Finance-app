@@ -6,6 +6,7 @@ const getYearFromDate = (value:string) => {
   return date.getFullYear().toString();
 }
 
+
 export const cashFlowConfig = [
   {
     label: "Date",
@@ -49,6 +50,7 @@ export const cashFlowConfig = [
       formatLargeMonetaryNumber(company.freeCashFlow),
   },
   ];
+
 
   
 export const balanceSheetConfig = [
@@ -98,11 +100,6 @@ export const balanceSheetConfig = [
       formatLargeMonetaryNumber(company.totalCurrentLiabilities),
   },
   {
-    label: "Long-Term Debt",
-    render: (company: CompanyBalanceSheet) =>
-      formatLargeMonetaryNumber(company.longTermDebt),
-  },
-  {
     label: "Stakeholder's Equity",
     render: (company: CompanyBalanceSheet) =>
       formatLargeMonetaryNumber(company.totalStockholdersEquity),
@@ -115,6 +112,7 @@ export const balanceSheetConfig = [
   ];
   
   
+
 export const profileConfig = [
   {
     label: "Current Ratio",
@@ -177,6 +175,9 @@ export const profileConfig = [
       "This is the upperbouind of the price range that a defensive investor should pay for a stock",
   },
   ];
+
+
+  
 
 export const incomeStatementConfig = [
   {
