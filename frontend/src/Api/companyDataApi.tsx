@@ -43,3 +43,4 @@ export const getTenK = async (query: string): Promise<Result<AxiosResponse<Compa
     const url = `${financeApiPath}sec_filings/${query}?type=10-k&page=0&apikey=${process.env.REACT_APP_API_KEY}`;
     return apiRequest<CompanyTenK[]>(url);
 }
+

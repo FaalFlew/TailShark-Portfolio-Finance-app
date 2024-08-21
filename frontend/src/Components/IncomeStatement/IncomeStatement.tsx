@@ -1,39 +1,45 @@
 import { Result } from "@/Types/apiTypes";
 import { getIncomeStatement } from "../../Api/companyDataApi";
 import { CompanyIncomeStatement } from "../../Types/company";
-import { AxiosResponse } from "axios";
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
 import { handleApiResponse } from "../../Utils/apiResponseHandler";
 import Table from "../Table/Table";
 import Spinner from "../Spinner/Spinner";
 import { incomeStatementConfig } from "../../Utils/companyTableConfigs";
+import { fetchData, incomeStatementStore, saveData } from "../../Utils/DB/DB";
+import { filterPropsObjArr } from "../../Utils/DB/DataMethods";
+import { incomeStatementProperties } from "../../Utils/DB/DataProperties";
 
 type Props = {};
 
 const IncomeStatement = (props: Props) => {
   const ticker = useOutletContext<string>();
-  const [incomeStatement, setIncomeStatement] =
-    useState<CompanyIncomeStatement[]>();
+  const [incomeStatement, setIncomeStatement] = useState<CompanyIncomeStatement[]>();
   const [serverError, setServerError] = useState<string>("");
 
   useEffect(() => {
     const incomeStatementFetch = async () => {
-      const cachedData = localStorage.getItem(`incomeStatement_${ticker}`);
-      if (cachedData) {
-        setIncomeStatement(JSON.parse(cachedData));
-      } else {
-        const response = await getIncomeStatement(ticker);
-        const result = handleApiResponse(response);
-        if (result.error) {
-          setServerError(result.error);
+      try {
+        const cachedData = await fetchData<CompanyIncomeStatement[]>(incomeStatementStore, ticker);
+        if (cachedData) {
+          setIncomeStatement(cachedData);
         } else {
-          setIncomeStatement(result.data);
-          localStorage.setItem(
-            `incomeStatement_${ticker}`,
-            JSON.stringify(result.data)
-          );
+          const response = await getIncomeStatement(ticker);
+          const result = handleApiResponse(response);
+          if (result.error) {
+            setServerError(result.error);
+          } else if (result.data) {
+            const data = result.data;
+            const storeData = filterPropsObjArr(incomeStatementProperties, data);
+
+            setIncomeStatement(data);
+            await saveData(incomeStatementStore, ticker,storeData);
+          }
         }
+      } catch (error) {
+        console.error("Error fetching balance sheet:", error);
+        setServerError("Error fetching balance sheet.");
       }
     };
 

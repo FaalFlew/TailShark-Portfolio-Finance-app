@@ -5,39 +5,43 @@ import CardList from "../../Components/CardList/CardList";
 import ListPortfolio from "../../Components/Portfolio/ListPortfolio/ListPortfolio";
 import Search from "../../Components/Search/Search";
 import { handleApiResponse } from "../../Utils/apiResponseHandler";
+import { companySearchStore, fetchData, saveData } from "../../Utils/DB/DB";
 
 interface Props {}
 
 const SearchPage = (props: Props) => {
-  const [search, setSearch] = useState<string>("");
+  const [ticker, setTicker] = useState<string>("");
   const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
   const [serverError, setServerError] = useState<string>("");
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const upperCaseValue = e.target.value.toUpperCase();
-    setSearch(upperCaseValue);
+    setTicker(upperCaseValue);
     console.log(upperCaseValue);
   };
 
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    const cachedData = localStorage.getItem(`companySearch_${search}`);
-    if (cachedData) {
-      setSearchResult(JSON.parse(cachedData));
-    } else {
-      const response = await searchCompanies(search);
-      const result = handleApiResponse(response);
-      if (result.error) {
-        setServerError(result.error);
-      } else if (result.data) {
-        setSearchResult(result.data);
-        localStorage.setItem(
-          `companySearch_${search}`,
-          JSON.stringify(result.data)
-        );
-        console.log(result.data);
+    try {
+      const cachedData = await fetchData<CompanySearch[]>(companySearchStore,  ticker);
+      if (cachedData) {
+        setSearchResult(cachedData);
+      } else {
+        const response = await searchCompanies(ticker);
+        const result = handleApiResponse(response);
+        if (result.error) {
+          setServerError(result.error);
+        } else if (result.data) {
+          const data = result.data;
+          setSearchResult(data);
+          await saveData(companySearchStore, ticker,data);
+        }
       }
+    } catch (error) {
+      console.log(typeof ticker);
+      console.error(error,"Error fetching companySearchStore:", error);
+      setServerError("Error fetching companySearchStore.");
     }
   };
 
@@ -64,7 +68,7 @@ const SearchPage = (props: Props) => {
       <main className="main">
         <Search
           onSearchSubmit={onSearchSubmit}
-          search={search}
+          search={ticker}
           handleSearchChange={handleSearchChange}
         />
         <ListPortfolio

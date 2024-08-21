@@ -6,8 +6,14 @@ import { handleApiResponse } from "../../Utils/apiResponseHandler";
 import RatioList from "../RatioList/RatioList";
 import Spinner from "../Spinner/Spinner";
 import { balanceSheetConfig } from "../../Utils/companyTableConfigs";
+import { filterPropsObj} from "../../Utils/DB/DataMethods";
+import { balanceSheetProperties} from "../../Utils/DB/DataProperties";
+
+import { fetchData, saveData, balanceSheetStore } from "../../Utils/DB/DB";
 
 type Props = {};
+
+
 
 const BalanceSheet = (props: Props) => {
   const ticker = useOutletContext<string>();
@@ -16,22 +22,25 @@ const BalanceSheet = (props: Props) => {
 
   useEffect(() => {
     const getCompanyBalanceSheet = async () => {
-      const cachedData = localStorage.getItem(`balanceSheet_${ticker}`);
-      if (cachedData) {
-        setBalanceSheetData(JSON.parse(cachedData));
-      } else {
-        const response = await getBalanceSheet(ticker);
-        const result = handleApiResponse(response);
-        if (result.error) {
-          setServerError(result.error);
-        } else if (result.data) {
-          setBalanceSheetData(result.data[0]);
-          localStorage.setItem(
-            `balanceSheet_${ticker}`,
-            JSON.stringify(result.data[0])
-          );
-          console.log(result.data[0], "balance");
+      try {
+        const cachedData = await fetchData<CompanyBalanceSheet>(balanceSheetStore, ticker);
+        if (cachedData) {
+          setBalanceSheetData(cachedData);
+        } else {
+          const response = await getBalanceSheet(ticker);
+          const result = handleApiResponse(response);
+          if (result.error) {
+            setServerError(result.error);
+          } else if (result.data) {
+            const data = result.data[0];
+            const storeData = filterPropsObj(balanceSheetProperties, data)
+            setBalanceSheetData(data);
+            await saveData(balanceSheetStore, ticker,storeData);
+          }
         }
+      } catch (error) {
+        console.error("Error fetching balance sheet:", error);
+        setServerError("Error fetching balance sheet.");
       }
     };
     getCompanyBalanceSheet();

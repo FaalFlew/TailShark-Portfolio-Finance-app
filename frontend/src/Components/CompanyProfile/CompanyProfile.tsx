@@ -6,33 +6,39 @@ import RatioList from "../RatioList/RatioList";
 import { handleApiResponse } from "../../Utils/apiResponseHandler";
 import Spinner from "../Spinner/Spinner";
 import { profileConfig } from "../../Utils/companyTableConfigs";
+import { companyKeyMetricStore, fetchData, saveData } from "../../Utils/DB/DB";
+import { filterPropsObj } from "../../Utils/DB/DataMethods";
+import { profileProperties } from "../../Utils/DB/DataProperties";
 
 type Props = {};
 
 const CompanyProfile = (props: Props) => {
   const ticker = useOutletContext<string>();
   const [serverError, setServerError] = useState<string>("");
-  const [companyKeyMetrics, setCompanyKeyMetrics] =
-    useState<CompanyKeyMetrics>();
+  const [companyKeyMetrics, setCompanyKeyMetrics] = useState<CompanyKeyMetrics>();
 
   useEffect(() => {
     const getCompanyKeyMetrics = async () => {
-      const cachedData = localStorage.getItem(`companyKeyMetrics_${ticker}`);
-      if (cachedData) {
-        setCompanyKeyMetrics(JSON.parse(cachedData));
-      } else {
-        const response = await getKeyMetrics(ticker);
-        const result = handleApiResponse(response);
-        if (result.error) {
-          setServerError(result.error);
-        } else if (result.data) {
-          setCompanyKeyMetrics(result.data[0]);
-          localStorage.setItem(
-            `companyKeyMetrics_${ticker}`,
-            JSON.stringify(result.data[0])
-          );
-          console.log(result.data[0]);
+      try {
+        const cachedData = await fetchData<CompanyKeyMetrics>(companyKeyMetricStore, ticker);
+        if (cachedData) {
+          setCompanyKeyMetrics(cachedData);
+        } else {
+          const response = await getKeyMetrics(ticker);
+          const result = handleApiResponse(response);
+          if (result.error) {
+            setServerError(result.error);
+          } else if (result.data) {
+            const data = result.data[0];
+            data.symbol = ticker
+            const storeData = filterPropsObj(profileProperties, data)
+            setCompanyKeyMetrics(data);
+            await saveData(companyKeyMetricStore, ticker,storeData);
+          }
         }
+      } catch (error) {
+        console.error("Error fetching companyKeyMetricStore:", error);
+        setServerError("Error fetching companyKeyMetricStore.");
       }
     };
 

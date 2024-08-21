@@ -1,4 +1,5 @@
 export const incomeStatementProperties = [
+    'symbol',
     'date',
     'revenue',
     'costOfRevenue',
@@ -14,6 +15,7 @@ export const incomeStatementProperties = [
     'incomeBeforeTaxRatio'] as const;
 
   export const cashFlowProperties = [
+    'symbol',
     'date',
     'operatingCashFlow',
     'netCashUsedForInvestingActivites',
@@ -26,6 +28,7 @@ export const incomeStatementProperties = [
 
 
   export const balanceSheetProperties = [
+    'symbol',
     'totalAssets',
     'totalCurrentAssets',
     'cashAndCashEquivalents',
@@ -40,6 +43,7 @@ export const incomeStatementProperties = [
   ] as const;
 
   export const profileProperties = [
+    'symbol',
     'currentRatioTTM',
     'roeTTM',
     'returnOnTangibleAssetsTTM',

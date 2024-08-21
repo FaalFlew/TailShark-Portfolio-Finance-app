@@ -202,6 +202,7 @@ export interface CompanySearch {
     link: string;
     finalLink: string;
   }
+
   
   export interface CompanyCashFlow {
     date: string;
@@ -308,6 +309,7 @@ export interface CompanySearch {
     dividendPerShareTTM: number;
     debtToMarketCapTTM: number;
   }
+
   
   export interface CompanyHistoricalDividend {
     symbol: string;

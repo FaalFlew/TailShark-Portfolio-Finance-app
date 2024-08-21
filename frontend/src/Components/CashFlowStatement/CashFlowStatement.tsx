@@ -6,6 +6,9 @@ import { useOutletContext } from "react-router";
 import Table from "../Table/Table";
 import Spinner from "../Spinner/Spinner";
 import { cashFlowConfig } from "../../Utils/companyTableConfigs";
+import { cashFlowStore, fetchData, saveData } from "../../Utils/DB/DB";
+import { cashFlowProperties } from "../../Utils/DB/DataProperties";
+import { filterPropsObjArr } from "../../Utils/DB/DataMethods";
 
 type Props = {};
 
@@ -16,21 +19,26 @@ const CashFlowStatement = (props: Props) => {
 
   useEffect(() => {
     const getCompanyCashFlow = async () => {
-      const cachedData = localStorage.getItem(`cashFlow_${ticker}`);
-      if (cachedData) {
-        setCashFlowData(JSON.parse(cachedData));
-      } else {
-        const response = await getCashFlowStatement(ticker!);
-        const result = handleApiResponse(response);
-        if (result.error) {
-          setServerError(result.error);
-        } else if (result.data) {
-          setCashFlowData(result.data);
-          localStorage.setItem(
-            `cashFlow_${ticker}`,
-            JSON.stringify(result.data)
-          );
+      try {
+        const cachedData = await fetchData<CompanyCashFlow[]>(cashFlowStore, ticker);
+        if (cachedData) {
+          setCashFlowData(cachedData);
+        } else {
+          const response = await getCashFlowStatement(ticker);
+          const result = handleApiResponse(response);
+          if (result.error) {
+            setServerError(result.error);
+          } else if (result.data) {
+            const data = result.data;
+            const storeData = filterPropsObjArr(cashFlowProperties, data);
+            console.log(storeData)
+            setCashFlowData(data);
+            await saveData(cashFlowStore, ticker,storeData);
+          }
         }
+      } catch (error) {
+        console.error("Error fetching balance sheet:", error);
+        setServerError("Error fetching balance sheet.");
       }
     };
     getCompanyCashFlow();

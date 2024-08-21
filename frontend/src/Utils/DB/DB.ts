@@ -1,5 +1,5 @@
 const dbName = "FinancialDataDB";
-const dbVersion = 2;
+const dbVersion = 1;
 
 const balanceSheetStore: string = "balanceSheets";
 const cashFlowStore: string = "cashFlows";
@@ -40,8 +40,7 @@ const openDatabase = async (): Promise<IDBDatabase> => {
   });
 };
 
-
-const saveData = async <T>(storeName: string, data: T): Promise<void> => {
+const saveData = async (storeName: string, key: string, data: any): Promise<void> => {
   if (!db) {
     await openDatabase();
   }
@@ -49,16 +48,17 @@ const saveData = async <T>(storeName: string, data: T): Promise<void> => {
   return new Promise((resolve, reject) => {
     const transaction = db!.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);
-    const request = store.put(data);
 
+    const record = Array.isArray(data) ? data : data;
+
+    const request = store.put({ symbol: key, data: record });
     request.onsuccess = () => resolve();
     request.onerror = (event: Event) =>
       reject("Error saving data: " + (event.target as IDBRequest).error);
   });
 };
 
-
-const fetchData = async <T>( storeName: string, key: string): Promise<T | undefined> => {
+const fetchData = async <T>(storeName: string, key: string): Promise<T | undefined> => {
   if (!db) {
     await openDatabase();
   }
@@ -66,15 +66,23 @@ const fetchData = async <T>( storeName: string, key: string): Promise<T | undefi
   return new Promise((resolve, reject) => {
     const transaction = db!.transaction(storeName, "readonly");
     const store = transaction.objectStore(storeName);
+
     const request = store.get(key);
 
     request.onsuccess = (event: Event) => {
-      resolve((event.target as IDBRequest).result);
+      const result = (event.target as IDBRequest).result;
+      if (result) {
+        resolve(result.data); 
+      } else {
+        resolve(undefined);
+      }
     };
+
     request.onerror = (event: Event) =>
       reject("Error fetching data: " + (event.target as IDBRequest).error);
   });
 };
+
 
 export {
   openDatabase,

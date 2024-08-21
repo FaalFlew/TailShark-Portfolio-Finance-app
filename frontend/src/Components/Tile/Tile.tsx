@@ -3,10 +3,10 @@ import React from "react";
 import "./Tile.css";
 interface Props {
   title: string;
-  subTitle: string | number;
+  subTitle?: string | number;
 }
 
-const Tile = ({ title, subTitle }: Props) => {
+const Tile = ({ title,  subTitle = "Not available" }: Props) => {
   return (
     <div className="tile-container">
       <div>
