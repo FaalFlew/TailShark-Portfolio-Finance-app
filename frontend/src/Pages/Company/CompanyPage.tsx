@@ -41,10 +41,9 @@ const CompanyPage = (props: Props) => {
             <div className="company-container">
               <CompanyDashboard ticker={ticker!}>
                 <TileContainer>
-                  <Tile title="Company" subTitle={company.companyName} />
-                  <Tile title="Price" subTitle={company.price} />
-                  <Tile title="Sector" subTitle={company.sector} />
+                  <Tile title={company.companyName} subTitle={company.price} priceChange={company.changes}/>
                   <Tile title="Mkt Cap" subTitle={company.mktCap} />
+                  <Tile title="Sector" subTitle={company.sector} />
                 </TileContainer>
                 <TenKFinder ticker={company.symbol} />
               </CompanyDashboard>

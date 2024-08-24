@@ -45,6 +45,23 @@
   margin: 0 -8px;
 }
 
+
+.price-change {
+font-size: 12px;
+}
+
+.negative {
+color: #D7021F;
+}
+
+.positive {
+  color: #188072;
+}
+
+.neutral {
+  color: #7A7A7A
+}
+
 @media (max-width: 600px) {
   .tile-container  {
     width: 70px;

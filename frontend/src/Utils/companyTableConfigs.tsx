@@ -1,4 +1,4 @@
-import { formatLargeMonetaryNumber, formatLargeNonMonetaryNumber,formatRatio } from "./NumberFormatting";
+import { formatLargeMonetaryNumber,formatRatio } from "./NumberFormatting";
 import { CompanyBalanceSheet, CompanyCashFlow, CompanyIncomeStatement, CompanyKeyMetrics } from "../Types/company";
 
 const getYearFromDate = (value:string) => {
