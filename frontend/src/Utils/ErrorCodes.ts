@@ -1,0 +1,7 @@
+export enum ErrorCodes {
+    NETWORK_ERROR = 1000,
+    TIMEOUT_ERROR = 1001,
+    SERVER_ERROR = 1002,
+    CLIENT_ERROR = 1003,
+    UNEXPECTED_ERROR = 1004,
+  }

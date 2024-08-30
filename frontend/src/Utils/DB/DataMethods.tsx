@@ -12,7 +12,7 @@ export const filterPropsObj = (dataProperties: readonly string[], dataArray: any
 
   //filter properties for array of objects
   export const filterPropsObjArr = (dataProperties: readonly string[], dataArray: any[]): { [key: string]: any }[] => {
-    return dataArray.slice(0, 4).map((item) => {
+    return dataArray.slice(0, 5).map((item) => {
       return dataProperties.reduce((acc, elem) => {
         if (elem in item) {
           acc[elem] = item[elem];

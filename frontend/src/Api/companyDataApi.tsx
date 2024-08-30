@@ -10,7 +10,7 @@ export interface SearchResponse {
 export type Error = string;
 
 export const searchCompanies = async (query: string): Promise<Result<AxiosResponse<SearchResponse>>> => {
-    const url = `${financeApiPath}search-ticker?query=${query}&limit=10&exchange=NASDAQ&apikey=${process.env.REACT_APP_API_KEY}`;
+    const url = `${financeApiPath}search-ticker?query=${query}&limit=10&exchange=NASDAQ,NYSE&apikey=${process.env.REACT_APP_API_KEY}`;
     return apiRequest<SearchResponse>(url);
 }
 

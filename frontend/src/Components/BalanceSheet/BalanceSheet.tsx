@@ -10,6 +10,7 @@ import { filterPropsObj} from "../../Utils/DB/DataMethods";
 import { balanceSheetProperties} from "../../Utils/DB/DataProperties";
 
 import { fetchData, saveData, balanceSheetStore } from "../../Utils/DB/DB";
+import { CustomError } from "../../Helpers/AxiosErrorHandler";
 
 type Props = {};
 
@@ -17,7 +18,7 @@ type Props = {};
 
 const BalanceSheet = (props: Props) => {
   const ticker = useOutletContext<string>();
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<CustomError>();
   const [balanceSheet, setBalanceSheetData] = useState<CompanyBalanceSheet>();
 
   useEffect(() => {
@@ -29,8 +30,8 @@ const BalanceSheet = (props: Props) => {
         } else {
           const response = await getBalanceSheet(ticker);
           const result = handleApiResponse(response);
-          if (result.error) {
-            setServerError(result.error);
+          if (result instanceof CustomError) {
+            setServerError(result);
           } else if (result.data) {
             const data = result.data[0];
             const storeData = filterPropsObj(balanceSheetProperties, data)
@@ -40,7 +41,6 @@ const BalanceSheet = (props: Props) => {
         }
       } catch (error) {
         console.error("Error fetching balance sheet:", error);
-        setServerError("Error fetching balance sheet.");
       }
     };
     getCompanyBalanceSheet();
@@ -53,7 +53,7 @@ const BalanceSheet = (props: Props) => {
         <RatioList config={balanceSheetConfig} data={balanceSheet} />
       ) : (
         <>
-          <p>{serverError}</p>
+          <p>{serverError?.message}</p>
           <Spinner isLoading={true} />
         </>
       )}

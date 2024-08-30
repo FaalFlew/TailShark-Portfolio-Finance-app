@@ -10,13 +10,14 @@ import { incomeStatementConfig } from "../../Utils/companyTableConfigs";
 import { fetchData, incomeStatementStore, saveData } from "../../Utils/DB/DB";
 import { filterPropsObjArr } from "../../Utils/DB/DataMethods";
 import { incomeStatementProperties } from "../../Utils/DB/DataProperties";
+import { CustomError } from "../../Helpers/AxiosErrorHandler";
 
 type Props = {};
 
 const IncomeStatement = (props: Props) => {
   const ticker = useOutletContext<string>();
   const [incomeStatement, setIncomeStatement] = useState<CompanyIncomeStatement[]>();
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<CustomError>();
 
   useEffect(() => {
     const incomeStatementFetch = async () => {
@@ -27,8 +28,8 @@ const IncomeStatement = (props: Props) => {
         } else {
           const response = await getIncomeStatement(ticker);
           const result = handleApiResponse(response);
-          if (result.error) {
-            setServerError(result.error);
+          if (result instanceof CustomError) {
+            setServerError(result);
           } else if (result.data) {
             const data = result.data;
             const storeData = filterPropsObjArr(incomeStatementProperties, data);
@@ -39,7 +40,6 @@ const IncomeStatement = (props: Props) => {
         }
       } catch (error) {
         console.error("Error fetching balance sheet:", error);
-        setServerError("Error fetching balance sheet.");
       }
     };
 
@@ -56,7 +56,7 @@ const IncomeStatement = (props: Props) => {
         </>
       ) : (
         <>
-          <p>{serverError}</p>
+          <p>{serverError?.message}</p>
           <Spinner isLoading={true} />
         </>
       )}

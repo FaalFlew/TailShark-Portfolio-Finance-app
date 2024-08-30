@@ -9,12 +9,13 @@ import { profileConfig } from "../../Utils/companyTableConfigs";
 import { companyKeyMetricStore, fetchData, saveData } from "../../Utils/DB/DB";
 import { filterPropsObj } from "../../Utils/DB/DataMethods";
 import { profileProperties } from "../../Utils/DB/DataProperties";
+import { CustomError } from "../../Helpers/AxiosErrorHandler";
 
 type Props = {};
 
 const CompanyProfile = (props: Props) => {
   const ticker = useOutletContext<string>();
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<CustomError>();
   const [companyKeyMetrics, setCompanyKeyMetrics] = useState<CompanyKeyMetrics>();
 
   useEffect(() => {
@@ -26,8 +27,8 @@ const CompanyProfile = (props: Props) => {
         } else {
           const response = await getKeyMetrics(ticker);
           const result = handleApiResponse(response);
-          if (result.error) {
-            setServerError(result.error);
+          if (result instanceof CustomError) {
+            setServerError(result);
           } else if (result.data) {
             const data = result.data[0];
             data.symbol = ticker
@@ -38,7 +39,6 @@ const CompanyProfile = (props: Props) => {
         }
       } catch (error) {
         console.error("Error fetching companyKeyMetricStore:", error);
-        setServerError("Error fetching companyKeyMetricStore.");
       }
     };
 
@@ -55,7 +55,7 @@ const CompanyProfile = (props: Props) => {
         </>
       ) : (
         <>
-          <p>{serverError}</p>
+          <p>{serverError?.message}</p>
           <Spinner isLoading={true} />
         </>
       )}

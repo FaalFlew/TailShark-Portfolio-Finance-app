@@ -6,6 +6,7 @@ import ListPortfolio from "../../Components/Portfolio/ListPortfolio/ListPortfoli
 import Search from "../../Components/Search/Search";
 import { handleApiResponse } from "../../Utils/apiResponseHandler";
 import { companySearchStore, fetchData, saveData } from "../../Utils/DB/DB";
+import { CustomError } from "../../Helpers/AxiosErrorHandler";
 
 interface Props {}
 
@@ -13,7 +14,7 @@ const SearchPage = (props: Props) => {
   const [ticker, setTicker] = useState<string>("");
   const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<CustomError>();
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const upperCaseValue = e.target.value.toUpperCase();
@@ -30,8 +31,8 @@ const SearchPage = (props: Props) => {
       } else {
         const response = await searchCompanies(ticker);
         const result = handleApiResponse(response);
-        if (result.error) {
-          setServerError(result.error);
+        if (result instanceof CustomError) {
+          setServerError(result);
         } else if (result.data) {
           const data = result.data;
           setSearchResult(data);
@@ -41,7 +42,6 @@ const SearchPage = (props: Props) => {
     } catch (error) {
       console.log(typeof ticker);
       console.error(error,"Error fetching companySearchStore:", error);
-      setServerError("Error fetching companySearchStore.");
     }
   };
 
@@ -79,7 +79,7 @@ const SearchPage = (props: Props) => {
           searchResults={searchResult}
           onPortfolioCreate={onPortfolioCreate}
         />
-        {serverError && <h1>{serverError}</h1>}
+        {serverError && <h1>{serverError.message}</h1>}
       </main>
     </>
   );

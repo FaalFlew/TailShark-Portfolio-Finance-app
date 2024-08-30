@@ -6,12 +6,13 @@ import TenKFinderItem from "./TenKFinderItem/TenKFinderItem";
 import Spinner from "../Spinner/Spinner";
 import "./TenKFinder.css"
 import { companyTenKStore, fetchData, saveData } from "../../Utils/DB/DB";
+import { CustomError } from "../../Helpers/AxiosErrorHandler";
 type Props = {
   ticker: string | undefined;
 };
 
 const TenKFinder = ({ ticker }: Props) => {
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<CustomError>();
   const [companyTenK, setCompanyTenK] = useState<CompanyTenK[]>([]);
   useEffect(() => {
     const getTenKData = async () => {
@@ -23,8 +24,8 @@ const TenKFinder = ({ ticker }: Props) => {
         } else {
           const response = await getTenK(ticker!);
           const result = handleApiResponse(response);
-          if (result.error) {
-            setServerError(result.error);
+          if (result instanceof CustomError) {
+            setServerError(result);
           } else if (result.data) {
             const data = result.data;
             const storeData = data.slice(0,4);
@@ -35,7 +36,6 @@ const TenKFinder = ({ ticker }: Props) => {
         }
       } catch (error) {
         console.error("Error fetching balance sheet:", error);
-        setServerError("Error fetching balance sheet.");
       }
     };
     getTenKData();
@@ -48,7 +48,7 @@ const TenKFinder = ({ ticker }: Props) => {
         })
       ) : (
         <>
-          <p>{serverError}</p>
+          <p>{serverError?.message}</p>
           <Spinner isLoading={true} />
         </>
       )}
