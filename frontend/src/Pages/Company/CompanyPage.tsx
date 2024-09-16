@@ -65,7 +65,7 @@ const CompanyPage = (props: Props) => {
               </CompanyDashboard>
             </div>
           ) : (
-            <h1>Company Data Not Found</h1>
+            <h1>Company Data Not Found{`${company}`}</h1>
           )}
         </div>
       </main>
