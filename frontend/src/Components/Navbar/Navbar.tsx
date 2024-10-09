@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import logo from "./Tailshark-logo.png";
 import { Link } from "react-router-dom";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
-
+import SearchBar from "../SearchBar/SearchBar";
 interface Props {}
 
 const Navbar: React.FC = (props: Props) => {
@@ -17,20 +17,18 @@ const Navbar: React.FC = (props: Props) => {
   const navClassName = isOpen ? "nav-div mobile" : "nav-div";
 
   return (
+    <div className="holder">
     <header className="nav-header">
       <div>
         <span id="main-logo">
           <Link id="logo-link" to="/">
             <img src={logo} alt="" />
+            
           </Link>
         </span>
       </div>
 
-      <div className={navClassName}>
-        <Link to="/search" className="">
-          Search
-        </Link>
-      </div>
+        <SearchBar/>
 
       <div className="main-ul-container">
         <ul className="main-ul">
@@ -48,6 +46,8 @@ const Navbar: React.FC = (props: Props) => {
         </ul>
       </div>
     </header>
+    </div>
+
   );
 };
 

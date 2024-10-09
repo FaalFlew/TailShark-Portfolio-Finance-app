@@ -1,3 +1,5 @@
+// We only want to store these properties
+
 export const incomeStatementProperties = [
     'symbol',
     'date',
@@ -53,4 +55,8 @@ export const incomeStatementProperties = [
     'capexPerShareTTM',
     'grahamNumberTTM',
     'peRatioTTM',
+  ] as const;
+
+  export const companySymbolProperties = [
+    'symbol',
   ] as const;

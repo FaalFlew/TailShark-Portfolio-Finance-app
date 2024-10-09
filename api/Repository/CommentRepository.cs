@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Data;
 using api.Interfaces;
 using api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
 {
@@ -15,9 +16,9 @@ namespace api.Repository
         {
             _context = context;
         }
-        public Task<List<Comment>> GetAllAsync()
+        public async Task<List<Comment>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Comments.ToListAsync();
         }
     }
 }

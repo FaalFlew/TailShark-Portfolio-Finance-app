@@ -60,6 +60,18 @@ aside {
   background-color: #129cff;
 }
 
+.side-nav li:nth-last-child(1) a {
+  border-radius: 20px;
+}
+
+.side-nav li:nth-last-child(1) a.active,
+.side-nav li:nth-last-child(1) a:hover,
+.side-nav li:nth-last-child(1) a:focus-visible {
+  background-color: #E9E9E9;
+  color: black;
+}
+
+
 .side-nav a span {
   font-size: 0.875rem;
   opacity: 0;

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { CompanyBalanceSheet, CompanyCashFlow, CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch, CompanyTenK } from "../Types/company";
+import { CompanyBalanceSheet, CompanyCashFlow, CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch, CompanySymbolList, CompanyTenK } from "../Types/company";
 import { apiRequest } from './apiMethod';
 import { financeApiPath } from "../environment";
 import {Result} from '../Types/apiTypes'
@@ -9,8 +9,13 @@ export interface SearchResponse {
 
 export type Error = string;
 
+export const searchSymbols = async (): Promise<Result<AxiosResponse<CompanySymbolList[]>>> => {
+    const url ="https://finnhub.io/api/v1/stock/symbol?exchange=US&mic=XNAS&securityType=Common%20Stock&token=crq68l9r01qutsn3j6egcrq68l9r01qutsn3j6f0"
+    return apiRequest<CompanySymbolList[]>(url);
+}
+
 export const searchCompanies = async (query: string): Promise<Result<AxiosResponse<SearchResponse>>> => {
-    const url = `${financeApiPath}search-ticker?query=${query}&limit=10&exchange=NASDAQ,NYSE&apikey=${process.env.REACT_APP_API_KEY}`;
+    const url = `${financeApiPath}search-ticker?query=${query}&limit=6&exchange=NASDAQ,NYSE&apikey=${process.env.REACT_APP_API_KEY}`;
     return apiRequest<SearchResponse>(url);
 }
 

@@ -12,14 +12,14 @@ const Sidebar: React.FC = () => {
     setIsExpanded((prevExpanded) => !prevExpanded);
     document.body.classList.toggle("sb-expanded");
   };
-
+/*
   const handleLinkClick = () => {
     if (isExpanded) {
       setIsExpanded(false);
       document.body.classList.remove("sb-expanded");
     }
   };
-
+*/
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -49,25 +49,25 @@ const Sidebar: React.FC = () => {
             to="profile"
             icon="bx bx-home-circle"
             label="Profile"
-            onClick={handleLinkClick}
+           // onClick={handleLinkClick}
           />
           <SidebarItem
             to="income"
             icon="bx bx-money"
             label="Income"
-            onClick={handleLinkClick}
+           // onClick={handleLinkClick}
           />
           <SidebarItem
             to="balance"
             icon="bx bx-spreadsheet"
             label="Balance"
-            onClick={handleLinkClick}
+           // onClick={handleLinkClick}
           />
           <SidebarItem
             to="cashflow"
             icon="bx bx-dollar-circle"
             label="Cashflow"
-            onClick={handleLinkClick}
+           // onClick={handleLinkClick}
           />
           <li>
             <a href="#" onClick={handleResizeClick} data-resize-btn>

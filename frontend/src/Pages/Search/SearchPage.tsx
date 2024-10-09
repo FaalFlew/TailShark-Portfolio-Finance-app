@@ -7,6 +7,7 @@ import Search from "../../Components/Search/Search";
 import { handleApiResponse } from "../../Utils/apiResponseHandler";
 import { companySearchStore, fetchData, saveData } from "../../Utils/DB/DB";
 import { CustomError } from "../../Helpers/AxiosErrorHandler";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 interface Props {}
 
@@ -79,6 +80,7 @@ const SearchPage = (props: Props) => {
           searchResults={searchResult}
           onPortfolioCreate={onPortfolioCreate}
         />
+        <SearchBar />
         {serverError && <h1>{serverError.message}</h1>}
       </main>
     </>
