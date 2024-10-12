@@ -20,7 +20,9 @@ const debounce = (func: Function, delay: number) => {
 };
 
 const SearchBar = () => {
-  const [companySymbols, setCompanySymbols] = useState<CompanySymbolList[]>([]);
+  const [companySymbolsByLetter, setCompanySymbolsByLetter] = useState<{
+    [key: string]: CompanySymbolList[];
+  }>({});
   const [serverError, setServerError] = useState<CustomError>();
   const [inputValue, setInputValue] = useState<string>("");
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
@@ -30,6 +32,20 @@ const SearchBar = () => {
   const searchBarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+
+  const groupSymbolsByLetter = (symbols: CompanySymbolList[]) => {
+    return symbols.reduce((acc, symbolObj) => {
+      const firstLetter = symbolObj.symbol.charAt(0).toUpperCase();
+      if (!acc[firstLetter]) {
+        acc[firstLetter] = [];
+      }
+      acc[firstLetter].push(symbolObj);
+
+      acc[firstLetter].sort((a, b) => a.symbol.length - b.symbol.length);
+
+      return acc;
+    }, {} as { [key: string]: CompanySymbolList[] });
+  };
 
   useEffect(() => {
     const companySymbolFetch = async () => {
@@ -43,7 +59,9 @@ const SearchBar = () => {
         } else if (result.data) {
           const data = result.data;
           console.log(data, "success");
-          setCompanySymbols(data);
+
+          const groupedSymbols = groupSymbolsByLetter(data);
+          setCompanySymbolsByLetter(groupedSymbols);
         }
       } catch (error) {
         console.error("Error fetching balance sheet:", error);
@@ -56,13 +74,19 @@ const SearchBar = () => {
   }, []);
 
   const debouncedInputChange = debounce((userData: string) => {
+    console.time("searchs");
     if (userData) {
-      const filteredArray = companySymbols
+      const firstLetter = userData.charAt(0).toUpperCase();
+
+      const symbolsForLetter = companySymbolsByLetter[firstLetter] || [];
+
+      const filteredArray = symbolsForLetter
         .filter((symbolObj) =>
           symbolObj.symbol.toUpperCase().startsWith(userData.toUpperCase())
         )
         .slice(0, 6)
         .map((symbolObj) => symbolObj.symbol);
+
       setFilteredSuggestions(filteredArray);
       setIsActive(true);
       setSelectedIndex(-1);
@@ -70,7 +94,9 @@ const SearchBar = () => {
       setFilteredSuggestions([]);
       setIsActive(false);
     }
-  }, 150);
+    console.timeEnd("searchs")
+
+  }, 0);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const userData = e.target.value.toUpperCase();
