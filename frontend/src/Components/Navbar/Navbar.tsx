@@ -1,7 +1,8 @@
 import "../../Shared/Css/Global.css";
 import "./Navbar.css";
 import React, { useState } from "react";
-import logo from "./Tailshark-logo.png";
+import Logo from "./Tailshark-logo.png";
+import MobileLogo from "./Tailshark-logo.png";
 import { Link } from "react-router-dom";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import SearchBar from "../SearchBar/SearchBar";
@@ -14,23 +15,26 @@ const Navbar: React.FC = (props: Props) => {
     setIsOpen(!isOpen);
   };
 
-  const navClassName = isOpen ? "nav-div mobile" : "nav-div";
+  const navClassName = isOpen ? "main-ul-container mobile" : "main-ul-container";
 
   return (
-    <div className="holder">
     <header className="nav-header">
-      <div>
+      <div className="logo-container">
         <span id="main-logo">
           <Link id="logo-link" to="/">
-            <img src={logo} alt="" />
-            
+            <img
+              srcSet={`${MobileLogo} 135w, ${Logo} 192w`}
+              sizes="(max-width: 600px) 135px, 192px"
+              src={`${MobileLogo}`}
+              alt="Description of the im..g"
+            />
           </Link>
         </span>
       </div>
 
-        <SearchBar/>
+      <SearchBar />
 
-      <div className="main-ul-container">
+      <div className={navClassName}>
         <ul className="main-ul">
           <li>
             <Link className="glow-on-hover" to="/">
@@ -42,12 +46,15 @@ const Navbar: React.FC = (props: Props) => {
               Sign Up
             </Link>
           </li>
-          <HamburgerMenu click={handleMenuClick} isOpen={isOpen} />
         </ul>
       </div>
-    </header>
-    </div>
+      <div className="menu-container">
+      <ul className="main-ul">
+      <HamburgerMenu click={handleMenuClick} isOpen={isOpen} />
+      </ul>
+      </div>
 
+    </header>
   );
 };
 

@@ -113,3 +113,23 @@
     background-position: -200% 0;
   }
 }
+
+@media screen and (max-width: 800px) {
+  
+.searchInput input {
+  height: 36px;
+  font-size: 12px;
+}
+
+.searchInput .icon {
+  position: absolute;
+  right: 0px;
+  top: 3px;
+  height: 35px;
+  width: 45px;
+  text-align: center;
+  line-height: 38px;
+  color: #0070C0;
+}
+
+}
