@@ -74,7 +74,6 @@ const SearchBar = () => {
   }, []);
 
   const debouncedInputChange = debounce((userData: string) => {
-    console.time("searchs");
     if (userData) {
       const firstLetter = userData.charAt(0).toUpperCase();
 
@@ -94,7 +93,6 @@ const SearchBar = () => {
       setFilteredSuggestions([]);
       setIsActive(false);
     }
-    console.timeEnd("searchs")
 
   }, 0);
 

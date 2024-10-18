@@ -1,8 +1,8 @@
 import "../../Shared/Css/Global.css";
 import "./Navbar.css";
 import React, { useState } from "react";
+import MobileLogo from "./mobile-logo.png";
 import Logo from "./Tailshark-logo.png";
-import MobileLogo from "./Tailshark-logo.png";
 import { Link } from "react-router-dom";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import SearchBar from "../SearchBar/SearchBar";
@@ -22,12 +22,24 @@ const Navbar: React.FC = (props: Props) => {
       <div className="logo-container">
         <span id="main-logo">
           <Link id="logo-link" to="/">
-            <img
-              srcSet={`${MobileLogo} 135w, ${Logo} 192w`}
-              sizes="(max-width: 600px) 135px, 192px"
-              src={`${MobileLogo}`}
-              alt="Description of the im..g"
-            />
+          <picture>
+      <source
+        media="(max-width: 600px)"
+        srcSet={MobileLogo} // Mobile logo
+        type="image/png"
+      />
+      <source
+        media="(min-width: 601px)"
+        srcSet={Logo} // Desktop logo
+        type="image/png"
+      />
+      <img
+        src={Logo} // Fallback if <source> elements are not supported
+        alt="Company Logo"
+        className="responsive-logo"
+      />
+          </picture>
+
           </Link>
         </span>
       </div>

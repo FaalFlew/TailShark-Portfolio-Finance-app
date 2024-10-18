@@ -21,6 +21,7 @@ const CompanyPage = (props: Props) => {
 
   useEffect(() => {
     const getProfileInit = async () => {
+      console.time("Sea");
       const response = await getCompanyProfile(ticker!);
       const result = handleApiResponse(response);
       if (result instanceof CustomError) {
@@ -28,6 +29,7 @@ const CompanyPage = (props: Props) => {
       } else if (result.data) {
         setCompany(result.data[0]);
       }
+      console.timeEnd("Sea");
     };
 
     getProfileInit();

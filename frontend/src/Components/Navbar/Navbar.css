@@ -35,11 +35,15 @@
    margin-top: 0.3rem;
   }
   
+  .menu-container {
+    display: none;
+
+  }
   .main-ul-container li {
    display: inline-block;
    margin: 0 0.2rem;
-   
   }
+ 
   
   .nav-header .sub-ul a{
    text-decoration: none;
@@ -101,7 +105,7 @@
 
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 1000px) {
      .menu-btn, .menu-btn__burger {
       float: right;
       display: block;
@@ -114,7 +118,7 @@
    }
   }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .nav-header {
     flex-direction: space-evenly;
     padding-top: 0.3rem;
@@ -154,6 +158,11 @@
 }
 
 @media screen and (max-width: 600px) {
+
+  .nav-header .main-ul li:nth-child(1) a:hover {
+    background-color: transparent;
+  }
+
 .menu-container{
   display:flex;
   align-items: center;
@@ -175,4 +184,3 @@
 .nav-header .bx-search-alt-2 {
   font-size:20px;
 }
-  

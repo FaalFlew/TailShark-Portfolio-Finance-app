@@ -114,7 +114,7 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   
 .searchInput input {
   height: 36px;

@@ -7,22 +7,28 @@ const Sidebar: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const sidebarRef = useRef<HTMLElement>(null);
 
+  const isMobileScreen = (width = 1000): boolean => {
+    return window.innerWidth < width;
+  };
+  
+
   const handleResizeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setIsExpanded((prevExpanded) => !prevExpanded);
     document.body.classList.toggle("sb-expanded");
   };
-/*
+
   const handleLinkClick = () => {
-    if (isExpanded) {
+    if (isMobileScreen() && isExpanded) {
       setIsExpanded(false);
       document.body.classList.remove("sb-expanded");
     }
   };
-*/
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
+        isMobileScreen() && 
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target as Node) &&
         isExpanded
@@ -39,6 +45,8 @@ const Sidebar: React.FC = () => {
   }, [isExpanded]);
 
   return (
+    <>
+      {isExpanded && isMobileScreen() && <div className="overlay" />} {/* Modal overlay */}
     <aside
       ref={sidebarRef}
       className={`sidebar-container ${isExpanded ? "sb-expanded" : ""}`}
@@ -49,25 +57,25 @@ const Sidebar: React.FC = () => {
             to="profile"
             icon="bx bx-home-circle"
             label="Profile"
-           // onClick={handleLinkClick}
+            onClick={handleLinkClick}
           />
           <SidebarItem
             to="income"
             icon="bx bx-money"
             label="Income"
-           // onClick={handleLinkClick}
+            onClick={handleLinkClick}
           />
           <SidebarItem
             to="balance"
             icon="bx bx-spreadsheet"
             label="Balance"
-           // onClick={handleLinkClick}
+            onClick={handleLinkClick}
           />
           <SidebarItem
             to="cashflow"
             icon="bx bx-dollar-circle"
             label="Cashflow"
-           // onClick={handleLinkClick}
+            onClick={handleLinkClick}
           />
           <li>
             <a href="#" onClick={handleResizeClick} data-resize-btn>
@@ -78,6 +86,7 @@ const Sidebar: React.FC = () => {
         </ul>
       </nav>
     </aside>
+    </>
   );
 };
 
