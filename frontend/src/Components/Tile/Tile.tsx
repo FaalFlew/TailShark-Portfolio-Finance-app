@@ -8,11 +8,12 @@ interface Props {
   title: string;
   subTitle?: string | number;
   priceChange?: number;
+  loading?:boolean;
 }
 
-const Tile = ({ title, subTitle = "Not available", priceChange }: Props) => {
+const Tile = ({ loading, title, subTitle = "Not available", priceChange }: Props) => {
   return (
-    <div className="tile-container">
+    <div className={`tile-container ${loading && "loading"}`}>
       <div>
         <h5 className="tile-title">{title}</h5>
 

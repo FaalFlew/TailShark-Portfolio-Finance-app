@@ -8,7 +8,7 @@
   background: #fff;
   width: 100%;
   border-radius: 5px;
-  position: relative; /* Required for the absolute positioning of resultBox */
+  position: relative;
 }
 
 .searchInput input {
@@ -30,26 +30,26 @@
 }
 
 .searchInput.active input {
-  border-radius: 5px 5px 0 0; /* Rounded top corners when active */
+  border-radius: 5px 5px 0 0;
 }
 
 .searchInput .resultBox {
-  padding: 0; /* Remove padding for better control */
+  padding: 0;
   max-height: 280px;
   overflow-y: auto;
-  position: absolute; /* Float above other elements */
-  top: 100%; /* Position just below the input field */
-  left: 0; /* Align with the left edge of the input */
-  width: 100%; /* Match the width of the input */
-  background-color: #FAFAFA; /* Background color for visibility */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-  z-index: 1000; /* Make sure it stays above other elements */
-  transition: opacity 0.3s ease; /* Smooth transition for visibility */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #FAFAFA;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: opacity 0.3s ease;
 }
 
 .searchInput.active .resultBox {
-  opacity: 1; /* Show the suggestions */
-  pointer-events: auto; /* Allow interaction */
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .resultBox li {
@@ -60,11 +60,11 @@
 }
 
 .searchInput.active .resultBox li {
-  display: block; /* Show items when active */
+  display: block;
 }
 
 .resultBox li:hover {
-  background: #efefef; /* Change background on hover */
+  background: #efefef;
 }
 
 .searchInput .icon {
@@ -79,22 +79,22 @@
 }
 
 .full-link {
-  display: block; /* Makes the link behave as a block element */
-  width: 100%; /* Ensure the link takes up the full width of the li */
-  height: 100%; /* Ensure the link takes up the full height of the li */
-  text-decoration: none; /* Remove underline */
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
   padding: 8px 12px;
 
-  color: inherit; /* Inherit the text color from the parent li */
+  color: inherit;
 }
 
 .selected {
-  background-color: #efefef; /* Highlight color */
+  background-color: #efefef;
 }
 
 
 /* Search input loading animation */
-.loading {
+.searchInput .loading {
   background: linear-gradient(
     to right,
     #f0f0f0 0%,

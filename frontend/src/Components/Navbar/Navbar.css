@@ -155,13 +155,14 @@
   .container {
     flex-basis: 40%;
   }
-}
-
-@media screen and (max-width: 600px) {
 
   .nav-header .main-ul li:nth-child(1) a:hover {
     background-color: transparent;
   }
+
+}
+
+@media screen and (max-width: 600px) {
 
 .menu-container{
   display:flex;
