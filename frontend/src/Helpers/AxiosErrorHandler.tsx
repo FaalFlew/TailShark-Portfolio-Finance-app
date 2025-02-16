@@ -5,7 +5,11 @@ export class CustomError extends Error {
   public code: ErrorCodes;
   public originalError?: AxiosError | unknown;
 
-  constructor(code: ErrorCodes, message: string, originalError?: AxiosError | unknown) {
+  constructor(
+    code: ErrorCodes,
+    message: string,
+    originalError?: AxiosError | unknown
+  ) {
     super(message);
     this.code = code;
     this.originalError = originalError;

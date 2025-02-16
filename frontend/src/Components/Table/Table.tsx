@@ -1,4 +1,6 @@
 import React from "react";
+import WarningSign from "../WarningSign/WarningSign";
+
 import "./Table.css";
 
 type Props = {
@@ -12,7 +14,7 @@ const Table = ({ config, data }: Props) => {
       <tr key={company.cik} className="custom-table-row">
         {config.map((val: any, index: number) => (
           <td key={index} className="custom-table-cell">
-            {val.render(company)}
+            {val.render?.(company) || <WarningSign />}
           </td>
         ))}
       </tr>

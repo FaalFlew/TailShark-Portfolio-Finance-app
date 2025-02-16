@@ -16,13 +16,17 @@ type Props = {};
 
 const IncomeStatement = (props: Props) => {
   const ticker = useOutletContext<string>();
-  const [incomeStatement, setIncomeStatement] = useState<CompanyIncomeStatement[]>();
+  const [incomeStatement, setIncomeStatement] =
+    useState<CompanyIncomeStatement[]>();
   const [serverError, setServerError] = useState<CustomError>();
 
   useEffect(() => {
     const incomeStatementFetch = async () => {
       try {
-        const cachedData = await fetchData<CompanyIncomeStatement[]>(incomeStatementStore, ticker);
+        const cachedData = await fetchData<CompanyIncomeStatement[]>(
+          incomeStatementStore,
+          ticker
+        );
         if (cachedData) {
           setIncomeStatement(cachedData);
         } else {
@@ -32,10 +36,13 @@ const IncomeStatement = (props: Props) => {
             setServerError(result);
           } else if (result.data) {
             const data = result.data;
-            const storeData = filterPropsObjArr(incomeStatementProperties, data);
+            const storeData = filterPropsObjArr(
+              incomeStatementProperties,
+              data
+            );
 
             setIncomeStatement(data);
-            await saveData(incomeStatementStore, ticker,storeData);
+            await saveData(incomeStatementStore, ticker, storeData);
           }
         }
       } catch (error) {

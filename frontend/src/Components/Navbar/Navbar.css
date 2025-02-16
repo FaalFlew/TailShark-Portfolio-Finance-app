@@ -78,7 +78,7 @@
   
   .nav-header .main-ul li:nth-child(1) a:hover{
    color:#0070C0;
-   background-color: #e3e3e3;
+   background-color: #E9E9E9;
    border-radius: 30px;
    transition: all 100ms;
   }

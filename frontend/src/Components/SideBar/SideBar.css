@@ -53,12 +53,17 @@ aside {
 }
 
 .side-nav a.active,
-.side-nav a:hover,
+.side-nav a.active:hover,
 .side-nav a:focus-visible {
   outline: none;
   color: #fff;
   background-color: #129cff;
 }
+
+.side-nav a:hover {
+  background-color: #E9E9E9;
+}
+
 
 .side-nav li:nth-last-child(1) a {
   border-radius: 20px;

@@ -1,0 +1,64 @@
+/* .error-icon {
+  position: relative;
+  display: inline-block;
+  font-size: 18px; 
+}
+
+.error-icon .circle {
+  color: #0e7700; 
+  border: 1.5px solid #1eff00;
+  border-radius: 50%;
+}
+
+.error-icon .exclamation {
+  color: #1eff00;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7em; 
+}
+*/
+
+.error-icon {
+  position: relative;
+  display: inline-block;
+  font-size: 18px;
+}
+
+.error-icon .circle {
+  color: #012f9a;
+  border: 1px solid #79d7ff;
+  border-radius: 50%;
+}
+
+.error-icon .exclamation {
+  color: #79d7ff;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7em;
+}
+
+.error-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.error-icon:hover::after {
+  opacity: 1;
+  visibility: visible;
+}

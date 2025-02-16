@@ -1,80 +1,79 @@
 .ratio-list-container {
-    margin: 0 auto;
-    padding: 0;
-    max-width: 800px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .ratio-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-  }
-  
+  margin: 0 auto;
+  padding: 0;
+  max-width: 800px;
+  font-family: Arial, sans-serif;
+}
+
+.ratio-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.ratio-list-item {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.ratio-list-item:last-child {
+  border-bottom: none;
+}
+
+.ratio-list-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.ratio-list-text {
+  flex-grow: 1;
+}
+
+.ratio-list-label {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.ratio-list-subtitle {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.ratio-list-rendered {
+  text-align: right;
+  flex-grow: 1;
+}
+
+.ratio-list-item:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
   .ratio-list-item {
-    padding: 16px;
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.2s ease;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .ratio-list-item:last-child {
-    border-bottom: none; 
-  }
-  
+
   .ratio-list-content {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+    flex-direction: column;
   }
-  
-  .ratio-list-text {
-    flex-grow: 1;
-  }
-  
-  .ratio-list-label {
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .ratio-list-subtitle {
-    margin: 0;
-    padding: 0;
-    font-size: 12px;
-    color: #666;
-  }
-  
+
   .ratio-list-rendered {
-    text-align: right;
-    flex-grow: 1;
+    text-align: left;
+    margin-top: 10px;
   }
-  
-  .ratio-list-item:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-  }
-  
-  @media (max-width: 600px) {
-    .ratio-list-item {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .ratio-list-content {
-      flex-direction: column;
-    }
-  
-    .ratio-list-rendered {
-      text-align: left;
-      margin-top: 10px;
-    }
-  }
+}

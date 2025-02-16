@@ -1,4 +1,6 @@
 import React from "react";
+import WarningSign from "../WarningSign/WarningSign";
+
 import "./RatioList.css";
 
 type Props = {
@@ -17,7 +19,9 @@ const RatioList = ({ config, data }: Props) => {
               <p className="ratio-list-subtitle">{row.subTitle}</p>
             )}
           </div>
-          <div className="ratio-list-rendered">{row.render(data)}</div>
+          <div className="ratio-list-rendered">
+            {row.render?.(data) || <WarningSign />}
+          </div>
         </div>
       </li>
     );
