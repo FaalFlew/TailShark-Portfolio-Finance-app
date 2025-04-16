@@ -1,13 +1,19 @@
-import '../../Shared/Css/Global.css'
-import React from 'react'
-import Hero from '../../Components/Hero/Hero'
+import "../../Shared/Css/Global.css";
+import React from "react";
+import Hero from "../../Components/Hero/Hero";
+import StockTicker from "../../Components/StockTicker/StockTicker";
 
 interface Props {}
 
 const HomePage = (props: Props) => {
   return (
-    <div><main className='main'><Hero /></main></div>
-  )
-}
+    <div>
+      <main className="main">
+        <StockTicker />
+        <Hero />
+      </main>
+    </div>
+  );
+};
 
-export default HomePage
+export default HomePage;
