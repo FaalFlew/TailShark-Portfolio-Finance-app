@@ -9,12 +9,17 @@ namespace api.Data
 {
     public class ApplicationDBContext : DbContext
     {
-        public ApplicationDBContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public DbSet<Stock> Stocks { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> dbContextOptions) : base(dbContextOptions)
         {
-            
+
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDBContext).Assembly);
+            base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Stock> Stocks {get; set;}
-        public DbSet<Comment> Comments {get; set;}
     }
 }
