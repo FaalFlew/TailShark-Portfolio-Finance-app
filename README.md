@@ -1,3 +1,4 @@
+## Note: The live demo is currently limited/down due to changes in the external Finance API pricing model. Please refer to the source code for architecture and logic.
 #### *Enviornment api keys are visible since the website is not yet live, they are there for easier clone and test of app in development.
 # Preview
 ![image](https://github.com/user-attachments/assets/c4e22c8c-1080-4661-b4b1-1be7b9597f48)
